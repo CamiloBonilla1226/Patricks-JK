@@ -14,7 +14,34 @@
   font-family: 'Fraunces';
   font-weight: 700;
   font-size: 17px;
-  color: var(--cream);
+  background: linear-gradient(
+    100deg,
+    var(--amber) 30%,
+    var(--amber-soft) 50%,
+    var(--amber) 70%
+  );
+  background-size: 250% 100%;
+  background-position: 150% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: logo-shine 3.5s ease-in-out infinite;
+}
+@keyframes logo-shine {
+  0%,
+  40% {
+    background-position: 150% 0;
+  }
+  70%,
+  100% {
+    background-position: -50% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .topbar .logo-text {
+    animation: none;
+    background-position: 50% 0;
+  }
 }
 .openpill {
   margin-left: auto;
@@ -24,15 +51,15 @@
   gap: 6px;
   font-size: 10.5px;
   font-weight: 700;
-  color: var(--teal);
+  color: var(--amber);
   border: 1px solid var(--border-strong);
   padding: 6px 9px;
 }
 .openpill .dot {
   width: 5px;
   height: 5px;
-  background: var(--teal);
-  box-shadow: 0 0 5px var(--teal);
+  background: var(--amber);
+  box-shadow: 0 0 5px var(--amber);
 }
 .openpill-closed {
   color: var(--cream-dim);
