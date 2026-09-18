@@ -150,12 +150,9 @@ main {
 /* ================= SOLO EN EL PUNTO FÍSICO ================= */
 .physical-only-grid {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 10px;
   margin-bottom: 6px;
-}
-.physical-only-item {
-  flex: 1 1 140px;
 }
 .physical-only-item img {
   width: 100%;
