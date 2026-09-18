@@ -19,7 +19,6 @@ export default function Menu({ activeCategory, onChangeCategory, onOpenProduct }
   const productsToShow = searching ? PRODUCTS : PRODUCTS.filter((p) => p.categoria === category)
   const visibleProducts = productsToShow
     .map((product) => resolveProductAvailability(product, isAvailable))
-    .filter((product) => product.estado === 'disponible')
     .filter((product) => matchesQuery(product, query))
 
   function selectCategory(key) {

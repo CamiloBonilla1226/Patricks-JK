@@ -8,7 +8,12 @@ function formatPrice(precio) {
 export default function ProductCard({ product, onOpen }) {
   const disponible = product.estado === 'disponible'
   return (
-    <button className={'card' + (disponible ? '' : ' is-out')} onClick={() => onOpen(product.id)}>
+    <button
+      className={'card' + (disponible ? '' : ' is-out')}
+      onClick={() => onOpen(product.id)}
+      disabled={!disponible}
+      aria-disabled={!disponible}
+    >
       <div className="cupwrap">
         <CupArt variant={product.art} />
       </div>
