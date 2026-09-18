@@ -23,7 +23,6 @@ export default function Inicio({ onOpenProduct, onGoToCategory }) {
       </div>
 
       <div className="sec-head">
-        <div className="eyebrow">Carta digital</div>
         <h1>¿Qué te vas a tomar hoy?</h1>
       </div>
 
@@ -56,11 +55,9 @@ export default function Inicio({ onOpenProduct, onGoToCategory }) {
       <div className="physical-only-grid">
         <div className="physical-only-item">
           <img src={micheladaPuntoFisico} alt="Michelada" />
-          <span>Michelada</span>
         </div>
         <div className="physical-only-item">
           <img src={jirafaPuntoFisico} alt="Jirafa" />
-          <span>Jirafa</span>
         </div>
       </div>
 
