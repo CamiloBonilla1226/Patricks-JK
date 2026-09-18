@@ -1,0 +1,32 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background: #0a0a10;
+  color: #f2f1f7;
+  font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+/* React mounts .app inside #root, unlike the static prototype where .app is
+   a direct child of <body>. Without an explicit width, #root (as a flex item
+   with the default overflow:visible) takes its content-based minimum width
+   instead of shrinking to the viewport, causing horizontal overflow below
+   430px — width:100% gives it a definite size so it clamps like .app does. */
+#root {
+  width: 100%;
+  min-width: 0;
+}
