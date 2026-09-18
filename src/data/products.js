@@ -34,3 +34,7 @@ export const PRODUCTS = [
   { id: 'combo_agu_gaseosa', nombre: 'Combo Aguardiente + 2 gaseosas', precio: 65000, categoria: 'Combos', estado: 'disponible' },
   { id: 'combo_ron_energizante', nombre: 'Combo Ron + 4 energizantes', precio: 95000, categoria: 'Combos', estado: 'disponible' },
 ]
+
+// Categorías derivadas del catálogo (en el orden en que aparecen), para no
+// mantener una lista aparte que se pueda desincronizar de los productos.
+export const CATEGORIES = [...new Set(PRODUCTS.map((p) => p.categoria))]

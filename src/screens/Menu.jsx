@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import ProductCard from '../components/ProductCard'
 import { IconSearch } from '../components/Icons'
-import { CATEGORIES, PRODUCTS, PRODUCTS_BY_CATEGORY } from '../data/products'
+import { CATEGORIES, PRODUCTS } from '../data/products'
 import { useDisponibilidad } from '../context/DisponibilidadContext'
 import { resolveProductAvailability } from '../utils/availability'
 import { matchesQuery } from '../utils/search'
@@ -9,17 +9,17 @@ import { matchesQuery } from '../utils/search'
 const SEARCH_MAX_LENGTH = 60
 
 export default function Menu({ activeCategory, onChangeCategory, onOpenProduct }) {
-  const category = CATEGORIES.find((c) => c.key === activeCategory) ?? CATEGORIES[0]
+  const category = CATEGORIES.includes(activeCategory) ? activeCategory : CATEGORIES[0]
   const { isAvailable } = useDisponibilidad()
   const [query, setQuery] = useState('')
   const searching = query.trim().length > 0
 
   // Buscando, se ignoran las categorías y se busca en todo el menú — el
   // cliente puede no acordarse en qué categoría está lo que quiere.
-  const idsToShow = searching ? Object.keys(PRODUCTS) : PRODUCTS_BY_CATEGORY[category.key]
-  const visibleProducts = idsToShow
-    .map((id) => resolveProductAvailability(PRODUCTS[id], isAvailable))
-    .filter((product) => product.available)
+  const productsToShow = searching ? PRODUCTS : PRODUCTS.filter((p) => p.categoria === category)
+  const visibleProducts = productsToShow
+    .map((product) => resolveProductAvailability(product, isAvailable))
+    .filter((product) => product.estado === 'disponible')
     .filter((product) => matchesQuery(product, query))
 
   function selectCategory(key) {
@@ -50,20 +50,20 @@ export default function Menu({ activeCategory, onChangeCategory, onOpenProduct }
       <div className="subtabs">
         {CATEGORIES.map((c) => (
           <button
-            key={c.key}
-            className={!searching && c.key === activeCategory ? 'active' : ''}
-            onClick={() => selectCategory(c.key)}
+            key={c}
+            className={!searching && c === activeCategory ? 'active' : ''}
+            onClick={() => selectCategory(c)}
           >
-            {c.label}
+            {c}
           </button>
         ))}
       </div>
 
-      <div className="catpanel" id={'cat-' + category.key}>
+      <div className="catpanel" id={'cat-' + category}>
         <div className="cat-count">
           {searching
             ? `${visibleProducts.length} resultado${visibleProducts.length === 1 ? '' : 's'}`
-            : category.countLabel}
+            : `${visibleProducts.length} producto${visibleProducts.length === 1 ? '' : 's'}`}
         </div>
 
         {visibleProducts.map((product) => (
@@ -74,7 +74,7 @@ export default function Menu({ activeCategory, onChangeCategory, onOpenProduct }
           <p className="menu-empty">
             {searching
               ? <>No encontramos ningún producto con &quot;{query.trim()}&quot;.</>
-              : <>Por ahora no hay productos disponibles en {category.label.toLowerCase()}.</>}
+              : <>Por ahora no hay productos disponibles en {category.toLowerCase()}.</>}
           </p>
         )}
       </div>

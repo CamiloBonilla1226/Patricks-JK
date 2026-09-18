@@ -16,10 +16,10 @@ function normalize(text) {
 /**
  * true si `product` coincide con lo que el cliente escribio en el buscador.
  * Busca como substring (no hace falta escribir el nombre completo) dentro
- * del nombre y de la descripcion corta, ignorando mayusculas y acentos.
+ * del nombre, ignorando mayusculas y acentos.
  */
 export function matchesQuery(product, query) {
   const q = normalize(query.trim())
   if (!q) return true
-  return normalize(product.name).includes(q) || normalize(product.contains).includes(q)
+  return normalize(product.nombre).includes(q)
 }

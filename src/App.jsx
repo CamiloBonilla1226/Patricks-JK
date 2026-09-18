@@ -10,11 +10,11 @@ import { useSwipeNavigation } from './utils/useSwipeNavigation'
 import './App.css'
 
 const TAB_ORDER = ['inicio', 'menu', 'carrito']
-const CATEGORY_KEYS = CATEGORIES.map((c) => c.key)
+const CATEGORY_KEYS = CATEGORIES
 
 function App() {
   const [activeTab, setActiveTab] = useState('inicio')
-  const [activeCategory, setActiveCategory] = useState('granizados')
+  const [activeCategory, setActiveCategory] = useState(CATEGORIES[0])
   const [openProductId, setOpenProductId] = useState(null)
   // Sentido de la última transición, para animar la pantalla que entra
   // desde el lado correcto. Empieza en null para que la primera pantalla no
