@@ -1,9 +1,6 @@
 import CupArt from '../CupArt'
+import { formatPrice } from '../../utils/format'
 import './ProductCard.css'
-
-function formatPrice(precio) {
-  return '$' + precio.toLocaleString('es-CO')
-}
 
 export default function ProductCard({ product, onOpen }) {
   const disponible = product.estado === 'disponible'

@@ -16,7 +16,7 @@
   width: 100%;
   max-width: 430px;
   max-height: 90dvh;
-  background: var(--elev-1);
+  background: var(--navy-2);
   border: 1px solid var(--border-strong);
   border-bottom: 0;
   display: flex;
@@ -29,7 +29,7 @@
 .sheet-hero {
   position: relative;
   height: 172px;
-  background: radial-gradient(70% 90% at 50% 20%, var(--elev-2), var(--bg));
+  background: radial-gradient(70% 90% at 50% 20%, var(--navy-2), var(--navy));
   display: grid;
   place-items: center;
 }
@@ -52,7 +52,7 @@
   place-items: center;
   background: rgba(10, 10, 16, 0.7);
   border: 1px solid var(--border-strong);
-  color: var(--text);
+  color: var(--cream);
   appearance: none;
   cursor: pointer;
   z-index: 2;
@@ -65,7 +65,7 @@
   padding: 16px 16px 0;
 }
 .sheet-top h3 {
-  font-family: 'Manrope';
+  font-family: 'Work Sans';
   font-weight: 800;
   font-size: 17px;
   margin-bottom: 6px;
@@ -79,21 +79,21 @@
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.6px;
-  color: var(--text-faint);
+  color: var(--cream-dim);
   margin: 16px 0 6px;
 }
 .sheet-desc {
   font-size: 12.5px;
-  color: var(--text-dim);
+  color: var(--cream-dim);
   line-height: 1.55;
 }
 .sheet-promo-note {
   margin-top: 10px;
   padding: 8px 10px;
-  background: var(--mint-soft);
+  background: var(--amber-tint);
   border: 1px solid var(--border);
   font-size: 11.5px;
-  color: var(--text);
+  color: var(--cream);
   line-height: 1.5;
 }
 
@@ -108,14 +108,14 @@
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.4px;
-  color: var(--text-dim);
+  color: var(--cream-dim);
   margin-bottom: 8px;
 }
 .group-hint {
   font-weight: 600;
   text-transform: none;
   letter-spacing: 0;
-  color: var(--text-faint);
+  color: var(--cream-dim);
 }
 .opt-row {
   display: flex;
@@ -123,30 +123,30 @@
   flex-wrap: wrap;
 }
 .opt {
-  font-family: 'Manrope';
+  font-family: 'Work Sans';
   font-size: 11.5px;
   font-weight: 700;
   padding: 9px 12px;
   border: 1px solid var(--border-strong);
-  background: var(--elev-2);
-  color: var(--text);
+  background: var(--navy-2);
+  color: var(--cream);
   appearance: none;
   cursor: pointer;
 }
 .opt[aria-pressed='true'] {
-  border-color: var(--mint);
-  color: var(--mint);
-  background: var(--mint-soft);
+  border-color: var(--amber);
+  color: var(--amber);
+  background: var(--amber-tint);
 }
 
 .sheet-promo-current {
   flex: none;
   margin: 0;
   padding: 8px 16px;
-  background: var(--pink-soft);
+  background: var(--amber-tint);
   border-top: 1px solid var(--border);
   font-size: 11.5px;
-  color: var(--text);
+  color: var(--cream);
   line-height: 1.5;
 }
 .sheet-footer {
@@ -156,7 +156,7 @@
   gap: 12px;
   padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px));
   border-top: 1px solid var(--border);
-  background: var(--elev-1);
+  background: var(--navy-2);
 }
 .sheet-footer .amt {
   flex: none;
@@ -171,18 +171,18 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.4px;
-  color: var(--text-faint);
+  color: var(--cream-dim);
   flex-basis: 100%;
 }
 .sheet-footer .amt b {
   font-size: 18px;
-  color: var(--text);
+  color: var(--cream);
   font-variant-numeric: tabular-nums;
 }
 .sheet-footer .amt .amt-was {
   font-size: 12px;
   font-weight: 600;
-  color: var(--text-faint);
+  color: var(--cream-dim);
   text-decoration: line-through;
 }
 .add-btn {
@@ -190,16 +190,16 @@
   appearance: none;
   border: 0;
   cursor: pointer;
-  font-family: 'Unbounded';
+  font-family: 'Fraunces';
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.2px;
-  color: var(--mint-ink);
-  background: var(--mint);
+  color: var(--ink-on-accent);
+  background: var(--amber);
   padding: 14px 10px;
 }
 .add-btn:disabled {
   cursor: not-allowed;
-  color: var(--text-faint);
-  background: var(--elev-2);
+  color: var(--cream-dim);
+  background: var(--navy-2);
 }

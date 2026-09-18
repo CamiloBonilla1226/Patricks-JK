@@ -3,7 +3,7 @@
   width: 126px;
   appearance: none;
   border: 1px solid var(--border);
-  background: var(--elev-1);
+  background: var(--navy-2);
   padding: 10px;
   text-align: left;
   cursor: pointer;
@@ -20,7 +20,7 @@
   height: 100%;
 }
 .rail-card h3 {
-  font-family: 'Manrope';
+  font-family: 'Work Sans';
   font-weight: 800;
   font-size: 12px;
   margin-bottom: 3px;
@@ -28,6 +28,6 @@
 .rail-card .price {
   font-size: 11.5px;
   font-weight: 700;
-  color: var(--mint);
+  color: var(--amber);
   font-variant-numeric: tabular-nums;
 }

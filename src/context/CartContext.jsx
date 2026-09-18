@@ -19,7 +19,7 @@ export function CartProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, initialState)
 
   const value = useMemo(() => {
-    const total = state.items.reduce((sum, item) => sum + item.total, 0)
+    const total = state.items.reduce((sum, item) => sum + item.precio, 0)
     return {
       items: state.items,
       count: state.items.length,

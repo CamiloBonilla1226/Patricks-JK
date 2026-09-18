@@ -1,15 +1,20 @@
 :root {
-  --bg: #0a0a10;
-  --elev-1: #131319;
-  --elev-2: #191922;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.15);
-  --text: #f2f1f7;
-  --text-dim: #9493a7;
-  --text-faint: #57566a;
-  --mint: #29ffb0;
-  --mint-soft: rgba(41, 255, 176, 0.1);
-  --mint-ink: #04140d;
-  --pink: #ff2f7e;
-  --pink-soft: rgba(255, 47, 126, 0.12);
+  /* Paleta de marca de Patrick's JK — ver CLAUDE.md sección 1.1. No
+     hardcodear otros colores en los componentes, usar estas variables. */
+  --navy: #100c09;
+  --navy-2: #191310;
+  --amber: #e8a33d;
+  --amber-soft: #f4c878;
+  --teal: #39c6d1;
+  --cream: #f3ecdd;
+  --cream-dim: #bfb6a2;
+
+  /* Derivados de la paleta de arriba (bordes y fondos translúcidos que se
+     repiten en muchos componentes) — son mezclas de los mismos 7 tonos, no
+     colores nuevos. */
+  --border: color-mix(in srgb, var(--cream) 10%, transparent);
+  --border-strong: color-mix(in srgb, var(--cream) 18%, transparent);
+  --amber-tint: color-mix(in srgb, var(--amber) 12%, transparent);
+  --teal-tint: color-mix(in srgb, var(--teal) 12%, transparent);
+  --ink-on-accent: var(--navy);
 }

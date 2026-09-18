@@ -1,24 +1,17 @@
 import { useMemo, useState } from 'react'
 import { IconCart, IconTrash, IconWhatsapp } from '../components/Icons'
 import { useCart } from '../context/CartContext'
-import { fmt } from '../data/products'
-import { priceCartItems } from '../utils/promo'
-import { useNow } from '../utils/useNow'
+import { formatPrice } from '../utils/format'
 import { buildWhatsAppOrderLink } from '../utils/whatsapp'
 
 const COMMENT_MAX_LENGTH = 300
 
 export default function Carrito() {
   const { items, removeItem } = useCart()
-  const now = useNow()
   const [comment, setComment] = useState('')
 
-  const pricedItems = useMemo(() => priceCartItems(items, now), [items, now])
-  const total = useMemo(() => pricedItems.reduce((sum, item) => sum + item.finalPrice, 0), [pricedItems])
-  const whatsappLink = useMemo(
-    () => buildWhatsAppOrderLink(pricedItems, total, comment),
-    [pricedItems, total, comment],
-  )
+  const total = useMemo(() => items.reduce((sum, item) => sum + item.precio, 0), [items])
+  const whatsappLink = useMemo(() => buildWhatsAppOrderLink(items, total, comment), [items, total, comment])
 
   return (
     <section className="screen" id="tab-carrito">
@@ -38,37 +31,26 @@ export default function Carrito() {
           </div>
         ) : (
           <>
-            {pricedItems.map((item) => {
-              const extra = []
-              if (item.size) extra.push('Tamaño ' + item.size)
-              if (item.adds.length) extra.push(item.adds.join(', '))
-              return (
-                <div className="cart-item" key={item.id}>
-                  <div className="row1">
-                    <h3>{item.name}</h3>
-                    <div className="price">
-                      {item.promoLabel && <span className="price-was">{fmt(item.total)}</span>}
-                      {fmt(item.finalPrice)}
-                    </div>
-                    <button
-                      type="button"
-                      className="cart-item-remove"
-                      onClick={() => removeItem(item.id)}
-                      aria-label={`Quitar ${item.name} del carrito`}
-                    >
-                      <IconTrash />
-                    </button>
-                  </div>
-                  <p>
-                    {extra.join(' · ') || 'Sin adiciones'}
-                    {item.promoLabel && <span className="promo-badge"> · {item.promoLabel}</span>}
-                  </p>
+            {items.map((item) => (
+              <div className="cart-item" key={item.id}>
+                <div className="row1">
+                  <h3>{item.nombre}</h3>
+                  <div className="price">{formatPrice(item.precio)}</div>
+                  <button
+                    type="button"
+                    className="cart-item-remove"
+                    onClick={() => removeItem(item.id)}
+                    aria-label={`Quitar ${item.nombre} del carrito`}
+                  >
+                    <IconTrash />
+                  </button>
                 </div>
-              )
-            })}
+                <p>{item.categoria}</p>
+              </div>
+            ))}
             <div className="cart-total">
               <span>Total del pedido</span>
-              <b>{fmt(total)}</b>
+              <b>{formatPrice(total)}</b>
             </div>
 
             <div className="cart-comment-group">

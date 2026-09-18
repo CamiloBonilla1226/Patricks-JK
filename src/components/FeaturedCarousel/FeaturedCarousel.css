@@ -34,5 +34,5 @@
 }
 .carousel-dot.active {
   width: 16px;
-  background: var(--mint);
+  background: var(--amber);
 }

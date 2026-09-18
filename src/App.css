@@ -1,7 +1,7 @@
 h1,
 h2,
 h3 {
-  font-family: 'Unbounded', 'Manrope', sans-serif;
+  font-family: 'Fraunces', 'Work Sans', sans-serif;
   font-weight: 700;
   text-wrap: balance;
   margin: 0;
@@ -78,7 +78,7 @@ main {
   font-weight: 700;
   letter-spacing: 1.6px;
   text-transform: uppercase;
-  color: var(--text-faint);
+  color: var(--cream-dim);
   margin-bottom: 5px;
 }
 .sec-head h1 {
@@ -102,19 +102,19 @@ main {
   display: flex;
   align-items: center;
   gap: 12px;
-  border: 1px solid var(--pink);
-  background: var(--pink-soft);
+  border: 1px solid var(--amber);
+  background: var(--amber-tint);
   padding: 12px;
   margin-bottom: 20px;
 }
 .promo-teaser .tag {
   flex: none;
-  font-family: 'Unbounded';
+  font-family: 'Fraunces';
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.5px;
-  color: var(--mint-ink);
-  background: var(--pink);
+  color: var(--ink-on-accent);
+  background: var(--amber);
   padding: 5px 6px;
   writing-mode: vertical-rl;
   text-orientation: mixed;
@@ -122,12 +122,12 @@ main {
 .promo-teaser strong {
   display: block;
   font-size: 13px;
-  color: var(--text);
+  color: var(--cream);
   margin-bottom: 2px;
 }
 .promo-teaser span {
   font-size: 11.5px;
-  color: var(--text-dim);
+  color: var(--cream-dim);
 }
 
 .block-title {
@@ -153,7 +153,7 @@ main {
   align-items: center;
   gap: 8px;
   border: 1px solid var(--border-strong);
-  background: var(--elev-1);
+  background: var(--navy-2);
   padding: 0 12px;
   margin-bottom: 14px;
 }
@@ -161,7 +161,7 @@ main {
   flex: none;
   width: 16px;
   height: 16px;
-  color: var(--text-faint);
+  color: var(--cream-dim);
 }
 .search-input {
   flex: 1;
@@ -169,20 +169,20 @@ main {
   appearance: none;
   border: 0;
   background: transparent;
-  color: var(--text);
-  font-family: 'Manrope', sans-serif;
+  color: var(--cream);
+  font-family: 'Work Sans', sans-serif;
   font-size: 13px;
   padding: 11px 0;
 }
 .search-input::placeholder {
-  color: var(--text-faint);
+  color: var(--cream-dim);
 }
 .search-input:focus {
   outline: none;
 }
 .menu-empty {
   font-size: 12px;
-  color: var(--text-faint);
+  color: var(--cream-dim);
   text-align: center;
   padding: 24px 12px;
   line-height: 1.6;
@@ -202,8 +202,8 @@ main {
   appearance: none;
   border: 0;
   border-right: 1px solid var(--border-strong);
-  background: var(--elev-1);
-  color: var(--text-dim);
+  background: var(--navy-2);
+  color: var(--cream-dim);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.2px;
@@ -214,14 +214,14 @@ main {
   border-right: 0;
 }
 .subtabs button.active {
-  background: var(--mint);
-  color: var(--mint-ink);
+  background: var(--amber);
+  color: var(--ink-on-accent);
 }
 
 .cat-count {
   font-size: 10.5px;
   font-weight: 700;
-  color: var(--text-faint);
+  color: var(--cream-dim);
   letter-spacing: 0.4px;
   text-transform: uppercase;
   margin-bottom: 12px;
@@ -241,7 +241,7 @@ main {
 .price {
   font-size: 13px;
   font-weight: 800;
-  color: var(--mint);
+  color: var(--amber);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
@@ -253,10 +253,10 @@ main {
   font-weight: 700;
   letter-spacing: 0.2px;
   text-transform: uppercase;
-  color: var(--text-faint);
+  color: var(--cream-dim);
 }
 .status.ok {
-  color: var(--mint);
+  color: var(--teal);
 }
 .status .dot {
   width: 5px;
@@ -267,13 +267,13 @@ main {
 .cart-empty {
   text-align: center;
   padding: 60px 20px;
-  color: var(--text-faint);
+  color: var(--cream-dim);
 }
 .cart-empty .ico {
   width: 40px;
   height: 40px;
   margin: 0 auto 14px;
-  color: var(--text-faint);
+  color: var(--cream-dim);
 }
 .cart-empty p {
   font-size: 13px;
@@ -282,7 +282,7 @@ main {
 
 .cart-item {
   border: 1px solid var(--border);
-  background: var(--elev-1);
+  background: var(--navy-2);
   padding: 12px;
   margin-bottom: 9px;
 }
@@ -294,7 +294,7 @@ main {
 }
 .cart-item h3 {
   flex: 1;
-  font-family: 'Manrope';
+  font-family: 'Work Sans';
   font-weight: 800;
   font-size: 13.5px;
 }
@@ -308,7 +308,7 @@ main {
 .cart-item .price-was {
   font-size: 11px;
   font-weight: 600;
-  color: var(--text-faint);
+  color: var(--cream-dim);
   text-decoration: line-through;
 }
 .cart-item-remove {
@@ -320,7 +320,7 @@ main {
   appearance: none;
   border: 1px solid var(--border);
   background: transparent;
-  color: var(--text-faint);
+  color: var(--cream-dim);
   cursor: pointer;
 }
 .cart-item-remove .ico {
@@ -328,16 +328,16 @@ main {
   height: 14px;
 }
 .cart-item-remove:hover {
-  border-color: var(--pink);
-  color: var(--pink);
+  border-color: var(--amber);
+  color: var(--amber);
 }
 .cart-item p {
   font-size: 11px;
-  color: var(--text-dim);
+  color: var(--cream-dim);
   line-height: 1.5;
 }
 .promo-badge {
-  color: var(--pink);
+  color: var(--amber);
   font-weight: 700;
 }
 
@@ -354,11 +354,11 @@ main {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.4px;
-  color: var(--text-faint);
+  color: var(--cream-dim);
 }
 .cart-total b {
   font-size: 19px;
-  color: var(--mint);
+  color: var(--amber);
   font-variant-numeric: tabular-nums;
 }
 
@@ -371,26 +371,26 @@ main {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.6px;
-  color: var(--text-faint);
+  color: var(--cream-dim);
   margin-bottom: 6px;
 }
 .cart-comment {
   width: 100%;
   min-height: 64px;
   resize: vertical;
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-size: 12.5px;
-  color: var(--text);
-  background: var(--elev-1);
+  color: var(--cream);
+  background: var(--navy-2);
   border: 1px solid var(--border-strong);
   padding: 10px;
 }
 .cart-comment::placeholder {
-  color: var(--text-faint);
+  color: var(--cream-dim);
 }
 .cart-comment:focus {
   outline: none;
-  border-color: var(--mint);
+  border-color: var(--amber);
 }
 
 .whatsapp-send-btn {
@@ -404,12 +404,12 @@ main {
   border: 0;
   text-decoration: none;
   cursor: pointer;
-  font-family: 'Unbounded';
+  font-family: 'Fraunces';
   font-size: 12.5px;
   font-weight: 700;
   letter-spacing: 0.2px;
-  color: var(--mint-ink);
-  background: var(--mint);
+  color: var(--ink-on-accent);
+  background: var(--amber);
   padding: 14px 10px;
 }
 .whatsapp-send-btn .ico {

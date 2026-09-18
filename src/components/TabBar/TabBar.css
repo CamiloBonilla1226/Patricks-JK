@@ -7,7 +7,7 @@
   max-width: 430px;
   z-index: 40;
   display: flex;
-  background: var(--elev-1);
+  background: var(--navy-2);
   border-top: 1px solid var(--border-strong);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
@@ -22,7 +22,7 @@
   align-items: center;
   gap: 5px;
   padding: 11px 4px 9px;
-  color: var(--text-faint);
+  color: var(--cream-dim);
   position: relative;
 }
 .tabbar button .ico {
@@ -35,7 +35,7 @@
   letter-spacing: 0.2px;
 }
 .tabbar button.active {
-  color: var(--mint);
+  color: var(--amber);
 }
 .tabbar button.active::before {
   content: '';
@@ -44,7 +44,7 @@
   left: 18%;
   right: 18%;
   height: 2px;
-  background: var(--mint);
+  background: var(--amber);
 }
 .tab-badge {
   position: absolute;
@@ -53,8 +53,8 @@
   min-width: 15px;
   height: 15px;
   padding: 0 3px;
-  background: var(--pink);
-  color: #fff;
+  background: var(--amber);
+  color: var(--ink-on-accent);
   font-size: 9px;
   font-weight: 800;
   display: grid;

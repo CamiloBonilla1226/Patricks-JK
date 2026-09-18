@@ -7,7 +7,7 @@
   appearance: none;
   cursor: pointer;
   padding: 11px;
-  background: var(--elev-1);
+  background: var(--navy-2);
   border: 1px solid var(--border);
   margin-bottom: 9px;
 }
@@ -15,7 +15,7 @@
   border-color: var(--border-strong);
 }
 .card:focus-visible {
-  outline: 2px solid var(--mint);
+  outline: 2px solid var(--amber);
   outline-offset: -2px;
 }
 .card .cupwrap {
@@ -38,21 +38,21 @@
   margin-bottom: 4px;
 }
 .card-body h3 {
-  font-family: 'Manrope';
+  font-family: 'Work Sans';
   font-weight: 800;
   font-size: 13.5px;
 }
 .card.is-out .price {
-  color: var(--text-faint);
+  color: var(--cream-dim);
 }
 .contains {
   font-size: 11.5px;
-  color: var(--text-dim);
+  color: var(--cream-dim);
   line-height: 1.4;
   margin-bottom: 7px;
 }
 .tapcue {
   flex: none;
-  color: var(--text-faint);
+  color: var(--cream-dim);
   font-size: 15px;
 }

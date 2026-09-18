@@ -1,4 +1,4 @@
-import { fmt } from '../data/products'
+import { formatPrice } from './format'
 
 // Número de WhatsApp del negocio (Colombia, +57) — se usa tanto para el
 // contacto de "Nosotros" como para enviar el pedido desde el carrito.
@@ -16,21 +16,16 @@ export function buildWhatsAppContactLink() {
  * devuelve el link de WhatsApp con ese texto precargado — el cliente solo
  * tiene que revisarlo y darle enviar, nunca se manda nada sin que él lo vea.
  */
-export function buildWhatsAppOrderLink(pricedItems, total, comment) {
-  const lines = ['🧊 *Nuevo pedido — BoraBora*', '']
+export function buildWhatsAppOrderLink(items, total, comment) {
+  const lines = ["🥃 *Nuevo pedido — Patrick's JK*", '']
 
-  pricedItems.forEach((item, i) => {
-    const details = []
-    if (item.size) details.push(`Tamaño ${item.size}`)
-    details.push(item.adds.length ? item.adds.join(', ') : 'Sin adiciones')
-
-    lines.push(`${i + 1}. *${item.name}*`)
-    lines.push(`   ${details.join(' · ')}`)
-    lines.push(item.promoLabel ? `   ${fmt(item.finalPrice)} _(${item.promoLabel})_` : `   ${fmt(item.finalPrice)}`)
+  items.forEach((item, i) => {
+    lines.push(`${i + 1}. *${item.nombre}*`)
+    lines.push(`   ${item.categoria} · ${formatPrice(item.precio)}`)
     lines.push('')
   })
 
-  lines.push(`*Total: ${fmt(total)}*`)
+  lines.push(`*Total: ${formatPrice(total)}*`)
 
   const trimmedComment = comment.trim()
   if (trimmedComment) {
@@ -39,7 +34,7 @@ export function buildWhatsAppOrderLink(pricedItems, total, comment) {
   }
 
   lines.push('')
-  lines.push('_Pedido generado desde la carta digital BoraBora_')
+  lines.push("_Pedido generado desde la carta digital de Patrick's JK_")
 
   const text = encodeURIComponent(lines.join('\n'))
   return `https://wa.me/${WHATSAPP_COUNTRY_CODE}${WHATSAPP_NUMBER}?text=${text}`
