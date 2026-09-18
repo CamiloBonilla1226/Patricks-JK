@@ -1,30 +1,41 @@
-# CLAUDE.md — Proyecto BoraBora (carta digital en React)
+# CLAUDE.md — Proyecto Patrick's JK (carta digital + ruleta en React)
 
-Este archivo son instrucciones permanentes para Claude Code en este proyecto.
-Aplican a TODA tarea futura, no solo a la implementación inicial de la carta.
+Este archivo son instrucciones permanentes para Claude Code / Codex en este
+proyecto. Aplican a TODA tarea futura, no solo a la implementación inicial.
 Antes de escribir o modificar código, relee este archivo si ha pasado tiempo
 desde la última tarea.
+
+Este proyecto nace como una copia del proyecto de BoraBora Granizados. La
+base de componentes, estructura de carpetas y patrones de código vienen de
+ahí, pero la identidad visual, los datos y el flujo de compra son distintos.
 
 ## 1. Mantener el mismo estilo (diseño y código)
 
 ### 1.1 Diseño visual — no te apartes de esto sin que te lo pidan
 - Paleta fija, definida como variables CSS en `src/styles/tokens.css`. Nunca
   hardcodees un color distinto directo en un componente; usa las variables:
-  - `--bg:#0a0a10` fondo general
-  - `--elev-1:#131319`, `--elev-2:#191922` superficies elevadas (tarjetas, modal)
-  - `--border:rgba(255,255,255,.08)`, `--border-strong:rgba(255,255,255,.15)`
-  - `--text:#f2f1f7`, `--text-dim:#9493a7`, `--text-faint:#57566a`
-  - `--mint:#29ffb0`, `--mint-soft:rgba(41,255,176,.10)`, `--mint-ink:#04140d`
-  - `--pink:#ff2f7e`, `--pink-soft:rgba(255,47,126,.12)`
-- Tipografías: Unbounded (700/800) para títulos y acentos, Manrope (400-800)
+  - `--navy:#100C09` fondo general
+  - `--navy-2:#191310` superficies elevadas (tarjetas, modal)
+  - `--amber:#E8A33D` acento principal (botones, precios, llamados a la acción)
+  - `--amber-soft:#F4C878` acento secundario / hover
+  - `--teal:#39C6D1` estados positivos (disponible, abierto, confirmación)
+  - `--cream:#F3ECDD` texto principal
+  - `--cream-dim:#BFB6A2` texto secundario / placeholders
+- Tipografías: Fraunces (600/700) para títulos y marca, Work Sans (400-600)
   para el resto del texto. No agregues una tercera familia sin pedir permiso.
-- Fondo negro predominante con acentos neón (verde menta y rosa) usados con
+- Fondo oscuro predominante (navy) con acentos ámbar y teal usados con
   moderación — para estados, badges, precios y llamados a la acción, no para
   fondos grandes.
-- Bordes y esquinas: mantén el lenguaje visual ya usado en las pantallas
-  existentes (radios, sombras, densidad de espaciado). Si vas a crear un
-  componente nuevo, primero mira cómo se ven los componentes vecinos y
-  replica esa consistencia en vez de inventar un estilo distinto.
+- Bordes rectangulares y minimalistas: radios pequeños (4-8px), nada de
+  esquinas muy redondeadas tipo "pill" salvo elementos circulares por
+  naturaleza (la ruleta, indicadores de estado). Si vas a crear un
+  componente nuevo, mira cómo se ven los componentes vecinos y replica esa
+  consistencia en vez de inventar un estilo distinto.
+- El encabezado superior (nombre + estado "Abierto") debe quedar fijo/anclado
+  (`position: sticky`) en la parte superior en las tres secciones de la app
+  (Inicio, Menú, Carrito), delgado, sin subtítulo.
+- Navegación inferior tipo tabs (Inicio / Menú / Carrito), fija en la parte
+  inferior, estilo heredado de BoraBora — no la cambies sin que se pida.
 - Mobile-first siempre: diseña y prueba primero en ancho de celular (~400px)
   antes de preocuparte por pantallas grandes. Nunca debe aparecer scroll
   horizontal.
@@ -43,11 +54,38 @@ desde la última tarea.
 - Estado global compartido (como el carrito) va en Context + reducer, nunca
   en variables globales sueltas ni pasando props por muchos niveles.
 - Los íconos van como componentes SVG de React o archivos `.svg`
-  importados — nunca como strings de HTML armados a mano.
+  importados — nunca como strings de HTML armados a mano ni emojis.
 - Antes de crear un componente nuevo, revisa si ya existe algo parecido que
   puedas reutilizar o extender en vez de duplicar lógica.
 
-## 2. Seguridad de la web (no negociable)
+## 2. Datos de productos (quemados, sin Excel ni backend todavía)
+
+- Este proyecto NO usa Excel como fuente de productos (a diferencia de
+  BoraBora). Todos los productos viven quemados en
+  `src/data/products.js`, exportados como un arreglo plano.
+- Cada producto tiene exactamente esta forma:
+  ```js
+  /**
+   * @typedef {Object} Producto
+   * @property {string} id
+   * @property {string} nombre
+   * @property {number} precio
+   * @property {string} categoria
+   * @property {'disponible'|'agotado'} estado
+   */
+  ```
+- No inventes campos adicionales (stock numérico, descripciones largas,
+  imágenes por producto, etc.) a menos que se pida explícitamente.
+- Un producto con `estado: 'agotado'` no debe poder agregarse al carrito y
+  debe mostrarse visualmente distinto (atenuado + etiqueta "Agotado").
+- Marca con un comentario explícito en `products.js` que estos datos son
+  temporales: `// Datos de ejemplo — reemplazar por Supabase cuando exista
+  el backend`.
+- Cuando exista backend real (Supabase), este archivo se reemplaza por una
+  consulta a la base de datos — no implementes esa parte todavía a menos
+  que se pida explícitamente.
+
+## 3. Seguridad de la web (no negociable)
 
 - Nunca uses `dangerouslySetInnerHTML`.
 - Ninguna clave, contraseña, token o secreto va escrito directamente en el
@@ -61,41 +99,46 @@ desde la última tarea.
 - Al desplegar, deben quedar activas las cabeceras de seguridad básicas:
   `Content-Security-Policy`, `X-Content-Type-Options: nosniff`,
   `X-Frame-Options: DENY`, `Referrer-Policy: strict-origin-when-cross-origin`.
-- Todo input de usuario (buscadores, formularios, campos de texto que se
-  agreguen en el futuro) debe validarse y limpiarse antes de usarse, para
-  evitar inyección de código.
+- Todo input de usuario (buscador, formulario de datos de entrega) debe
+  validarse y limpiarse antes de usarse, para evitar inyección de código.
 - El sitio debe servirse solo por HTTPS en producción.
 - Los datos de productos/precios actuales son de ejemplo (mock, locales).
   Cuando se conecte un backend real, cualquier operación que escriba datos
-  (pedidos, panel de administrador) debe tener su propia autenticación —
-  nunca queda abierta sin validar quién hace la petición.
+  (pedidos, registro de dispositivo para la ruleta, panel de administrador)
+  debe tener su propia validación — nunca queda abierta sin validar quién
+  hace la petición.
+- El identificador de dispositivo para la ruleta (`device_id`) se genera y
+  guarda en el cliente (localStorage / `crypto.randomUUID()`). No es un
+  mecanismo de seguridad fuerte — es un control de abuso liviano, no trates
+  esta lógica como si fuera autenticación real.
 - No expongas en el cliente ninguna lógica o dato que debería vivir solo en
   el backend (por ejemplo, reglas de negocio sensibles o llaves de servicios
   externos).
 
-## 3. Mejores prácticas
+## 4. Mejores prácticas
 
 - ESLint debe estar configurado con la config recomendada de React y sin
   errores pendientes antes de dar una tarea por terminada.
-- Accesibilidad: modales/bottom-sheets deben poder cerrarse con Escape,
-  clic fuera (backdrop) y un botón visible; el foco de teclado debe quedar
-  atrapado dentro del modal mientras está abierto. Usa etiquetas y roles
-  ARIA donde corresponda (botones, inputs, elementos interactivos).
+- Accesibilidad: modales/overlays (ruleta, formulario de entrega) deben
+  poder cerrarse con Escape, clic fuera (backdrop) y un botón visible; el
+  foco de teclado debe quedar atrapado dentro del modal mientras está
+  abierto. Usa etiquetas y roles ARIA donde corresponda.
 - Comentarios claros donde el código no sea autoexplicativo, especialmente
-  en lógica de negocio (por ejemplo el cálculo de precios o promociones).
-  Marca con un comentario explícito cualquier dato o lógica que sea
-  temporal/de ejemplo y deba reemplazarse más adelante (por ejemplo:
-  "Datos de ejemplo — reemplazar por una API/base de datos real").
+  en lógica de negocio (cálculo de descuentos, elegibilidad de la ruleta,
+  condición de monto mínimo de compra). Marca con un comentario explícito
+  cualquier dato o lógica que sea temporal/de ejemplo y deba reemplazarse
+  más adelante.
 - Evita duplicar lógica: si una regla de negocio (como el cálculo de un
-  precio total o una condición de horario) se usa en más de un lugar,
-  ponla en una sola función reutilizable en `utils/`, no la repitas.
+  precio total, la elegibilidad para la ruleta o una condición de horario)
+  se usa en más de un lugar, ponla en una sola función reutilizable en
+  `utils/`, no la repitas.
 - Haz commits pequeños y con mensajes claros describiendo qué cambió y por
   qué. No incluyas `node_modules` ni archivos `.env` en ningún commit.
 - Antes de dar una tarea por terminada: pruébala en el navegador, en ancho
   de celular, y confirma que no rompiste ninguna pantalla que ya
   funcionaba.
 
-## 4. Implementar de la manera más óptima
+## 5. Implementar de la manera más óptima
 
 - Prioriza siempre simplicidad y legibilidad sobre soluciones ingeniosas
   pero difíciles de mantener. Este proyecto lo sigue construyendo alguien
@@ -103,6 +146,9 @@ desde la última tarea.
   releyéndolo.
 - No sobre-diseñes: implementa lo que la tarea pide, sin agregar
   funcionalidades, pantallas o abstracciones que no se pidieron todavía.
+  En particular: NO implementes todavía backend/Supabase, tablas de
+  dispositivos ni lógica de servidor para la ruleta — eso se hace en una
+  fase posterior y explícita.
 - Evita cálculos o renders innecesarios (por ejemplo, no recalcules el
   total del carrito en cada render si no cambió nada relevante; usa
   memoización solo cuando de verdad se note una mejora, no por costumbre).
@@ -116,12 +162,23 @@ desde la última tarea.
   implementar y sugiere la alternativa correcta, en vez de aplicar la
   instrucción tal cual si eso introduce un riesgo o rompe la consistencia
   del proyecto.
+- Haz los cambios en pasos pequeños y verificables. No mezcles varias
+  tareas distintas (por ejemplo cambiar colores y cambiar la fuente de
+  datos) en un mismo commit o en una misma pasada de cambios.
 
 ## Contexto del proyecto
 
-BoraBora es un negocio real de granizados, micheladas, peceras y licor. Esta
-app es la carta digital para el cliente (sin pedidos por WhatsApp, solo
-consulta y armado de carrito). Planeado a futuro: panel de administrador y
-base de datos real compartiendo backend con esta app cliente (arquitectura
-tipo dos apps en Vercel + una sola base de datos). No implementes esa parte
-todavía a menos que se pida explícitamente.
+Patrick's JK es un bar / licorería real. Esta app es la carta digital para
+el cliente, con carrito de compras y confirmación de pedido por WhatsApp
+(no hay pasarela de pago). Incluye una promoción de ruleta de descuentos:
+si el subtotal del carrito es mayor o igual a $70.000 COP y el dispositivo
+no ha jugado antes, el cliente puede girar la ruleta y el premio se aplica
+a esa misma compra; si el dispositivo ya jugó, se salta la ruleta y va
+directo al formulario de entrega (nombre, celular, dirección).
+
+Por ahora todo funciona en el cliente, con datos de productos quemados
+(sin Excel, sin backend) y el estado de la ruleta guardado en localStorage.
+Planeado a futuro: backend real con Supabase (tablas `dispositivos_ruleta`
+y `pedidos`) para que el control de "un giro por dispositivo" sea real y no
+se pueda evadir borrando el localStorage. No implementes esa parte todavía
+a menos que se pida explícitamente.
