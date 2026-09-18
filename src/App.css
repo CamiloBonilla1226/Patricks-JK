@@ -89,14 +89,13 @@ main {
 .hero-logo {
   display: flex;
   justify-content: center;
-  padding: 6px 0 18px;
+  padding: 0 0 18px;
 }
-.hero-logo-text {
-  font-family: 'Fraunces';
-  font-weight: 700;
-  font-size: 28px;
-  color: var(--cream);
-  text-align: center;
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0;
 }
 
 .promo-teaser {
@@ -146,6 +145,29 @@ main {
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   margin-bottom: 6px;
+}
+
+/* ================= SOLO EN EL PUNTO FÍSICO ================= */
+.physical-only-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.physical-only-item {
+  flex: 1 1 140px;
+}
+.physical-only-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.physical-only-item span {
+  display: block;
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--cream-dim);
+  text-align: center;
 }
 
 /* ================= MENU (buscador y sub-tabs) ================= */

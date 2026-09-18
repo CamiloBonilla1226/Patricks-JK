@@ -4,6 +4,9 @@ import StoreInfo from '../components/StoreInfo'
 import { PRODUCTS, CATEGORIES } from '../data/products'
 import { useDisponibilidad } from '../context/DisponibilidadContext'
 import { resolveProductAvailability } from '../utils/availability'
+import heroInicio from '../assets/images/hero-inicio.jpeg'
+import micheladaPuntoFisico from '../assets/images/michelada-punto-fisico.jpeg'
+import jirafaPuntoFisico from '../assets/images/jirafa-punto-fisico.jpeg'
 
 const FEATURED_COUNT = 5
 
@@ -16,7 +19,7 @@ export default function Inicio({ onOpenProduct, onGoToCategory }) {
   return (
     <section className="screen" id="tab-inicio">
       <div className="hero-logo">
-        <span className="hero-logo-text">Patrick's JK</span>
+        <img className="hero-image" src={heroInicio} alt="Patrick's JK" />
       </div>
 
       <div className="sec-head">
@@ -45,6 +48,20 @@ export default function Inicio({ onOpenProduct, onGoToCategory }) {
             onOpen={onGoToCategory}
           />
         ))}
+      </div>
+
+      <div className="block-title">
+        <h2>Solo en el punto físico</h2>
+      </div>
+      <div className="physical-only-grid">
+        <div className="physical-only-item">
+          <img src={micheladaPuntoFisico} alt="Michelada" />
+          <span>Michelada</span>
+        </div>
+        <div className="physical-only-item">
+          <img src={jirafaPuntoFisico} alt="Jirafa" />
+          <span>Jirafa</span>
+        </div>
       </div>
 
       <div className="block-title">
