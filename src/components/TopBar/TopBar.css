@@ -9,11 +9,12 @@
   background: var(--navy);
   border-bottom: 1px solid var(--border);
 }
-.topbar .logo-img {
-  height: 34px;
-  width: auto;
+.topbar .logo-text {
   flex: none;
-  display: block;
+  font-family: 'Fraunces';
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--cream);
 }
 .openpill {
   margin-left: auto;

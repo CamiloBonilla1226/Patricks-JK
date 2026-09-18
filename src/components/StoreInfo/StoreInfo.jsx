@@ -3,7 +3,8 @@ import { SCHEDULE_TEXT } from '../../utils/schedule'
 import { WHATSAPP_NUMBER, buildWhatsAppContactLink } from '../../utils/whatsapp'
 import './StoreInfo.css'
 
-const INSTAGRAM_HANDLE = 'BoraBoraGranizados'
+// Dato de ejemplo — confirmar el handle real de Instagram de Patrick's JK.
+const INSTAGRAM_HANDLE = 'patricksjk'
 
 export default function StoreInfo() {
   return (

@@ -1,42 +1,27 @@
 import FeaturedCarousel from '../components/FeaturedCarousel'
 import CategoryTile from '../components/CategoryTile'
 import StoreInfo from '../components/StoreInfo'
-import { PRODUCTS, FEATURED_IDS, CATEGORIES } from '../data/products'
-import { useNow } from '../utils/useNow'
-import { isPromoDay } from '../utils/schedule'
+import { PRODUCTS, CATEGORIES } from '../data/products'
 import { useDisponibilidad } from '../context/DisponibilidadContext'
 import { resolveProductAvailability } from '../utils/availability'
-import logo from '../assets/logo-borabora.png'
+
+const FEATURED_COUNT = 5
 
 export default function Inicio({ onOpenProduct, onGoToCategory }) {
-  const now = useNow()
-  const promoToday = isPromoDay(now)
   const { isAvailable } = useDisponibilidad()
-  const featuredProducts = FEATURED_IDS.map((id) => resolveProductAvailability(PRODUCTS[id], isAvailable)).filter(
-    (product) => product.available,
-  )
+  const featuredProducts = PRODUCTS.map((product) => resolveProductAvailability(product, isAvailable))
+    .filter((product) => product.estado === 'disponible')
+    .slice(0, FEATURED_COUNT)
 
   return (
     <section className="screen" id="tab-inicio">
       <div className="hero-logo">
-        <img src={logo} alt="BoraBora" />
+        <span className="hero-logo-text">Patrick's JK</span>
       </div>
 
       <div className="sec-head">
         <div className="eyebrow">Carta digital</div>
-        <h1>¿Granizado o miedo?</h1>
-      </div>
-
-      <div className="promo-teaser">
-        <span className="tag">{promoToday ? 'HOY' : 'PROMO'}</span>
-        <span style={{ flex: 1 }}>
-          <strong>
-            {promoToday
-              ? 'Martes y miércoles de promo'
-              : 'Recuerda que los martes y miércoles hay promo'}
-          </strong>
-          <span>Comprando 1 granizado, 50% off en uno pequeño · comprando 2, el pequeño es gratis</span>
-        </span>
+        <h1>¿Qué te vas a tomar hoy?</h1>
       </div>
 
       {featuredProducts.length > 0 && (
@@ -53,7 +38,12 @@ export default function Inicio({ onOpenProduct, onGoToCategory }) {
       </div>
       <div className="cat-grid">
         {CATEGORIES.map((c) => (
-          <CategoryTile key={c.key} category={c} onOpen={onGoToCategory} />
+          <CategoryTile
+            key={c}
+            category={c}
+            count={PRODUCTS.filter((p) => p.categoria === c).length}
+            onOpen={onGoToCategory}
+          />
         ))}
       </div>
 

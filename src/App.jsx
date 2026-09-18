@@ -47,15 +47,15 @@ function App() {
       return
     }
     // Ya no hay más categorías de ese lado: seguir deslizando saca de Menú
-    // (de Licor hacia la derecha entra a Carrito, de Granizados hacia la
-    // izquierda entra a Inicio).
+    // (desde la última categoría hacia la derecha entra a Carrito, desde la
+    // primera hacia la izquierda entra a Inicio).
     goToAdjacentTab(step)
   }
 
   // Deslizar sobre el contenido: en Inicio y Carrito cambia de pantalla,
-  // pero en Menú primero recorre las categorías (Granizados → Micheladas →
-  // Peceras → Licor) y solo cambia de pantalla al pasarse del primer o
-  // último filtro. Se desactiva mientras hay una ficha de producto abierta
+  // pero en Menú primero recorre las categorías (en el orden de CATEGORIES)
+  // y solo cambia de pantalla al pasarse de la primera o última. Se
+  // desactiva mientras hay una ficha de producto abierta
   // (ese gesto lo maneja ProductSheet) o al tocar el carrusel de Inicio.
   const contentSwipeHandlers = useSwipeNavigation({
     disabled: openProductId !== null,

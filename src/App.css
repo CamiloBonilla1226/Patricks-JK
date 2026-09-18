@@ -91,11 +91,12 @@ main {
   justify-content: center;
   padding: 6px 0 18px;
 }
-.hero-logo img {
-  width: 100%;
-  max-width: 320px;
-  height: auto;
-  display: block;
+.hero-logo-text {
+  font-family: 'Fraunces';
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--cream);
+  text-align: center;
 }
 
 .promo-teaser {

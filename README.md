@@ -1,6 +1,6 @@
-# BoraBora — Carta digital
+# Patrick's JK — Carta digital
 
-Aplicación React + Vite que replica la carta digital de BoraBora (granizados, micheladas, peceras y licor): navegación por Inicio / Menú / Carrito, ficha de producto con tamaño y adiciones, y carrito de compra manejado con Context + reducer.
+Aplicación React + Vite con la carta digital de Patrick's JK (bar / licorería): navegación por Inicio / Menú / Carrito, buscador y filtro por categoría, ficha de producto y carrito de compra manejado con Context + reducer, con confirmación de pedido por WhatsApp.
 
 ## Desarrollo
 
@@ -57,9 +57,10 @@ frontend y venir de un backend propio que exponga una API, con:
 - **`npm audit`**: se corrió antes de cada entrega funcional; 0 vulnerabilidades
   reportadas a la fecha. Antes de desplegar a producción, correr `npm audit` de
   nuevo y resolver cualquier hallazgo `high`/`critical`.
-- **Inputs de usuario**: la app actualmente no tiene formularios ni campos de texto
-  (no hay buscador ni inputs). Si se agrega alguno (por ejemplo un buscador de
-  productos), debe: validarse (longitud, tipo esperado) y renderizarse siempre vía
+- **Inputs de usuario**: el buscador del Menú (`src/screens/Menu.jsx`) es el único
+  input de texto actual; compara contra `nombre` en el cliente, sin backend. Si se
+  agrega otro input (por ejemplo un formulario de entrega), debe: validarse (longitud,
+  tipo esperado) y renderizarse siempre vía
   JSX normal (nunca `dangerouslySetInnerHTML`), que escapa el contenido
   automáticamente y evita inyección de HTML/script. Si el valor se usa para filtrar
   o armar una consulta a un backend, esa validación/sanitización debe repetirse

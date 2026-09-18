@@ -1,5 +1,5 @@
 import CupArt from '../CupArt'
-import { listPrice } from '../../data/products'
+import { formatPrice } from '../../utils/format'
 import './RailCard.css'
 
 export default function RailCard({ product, onOpen }) {
@@ -8,8 +8,8 @@ export default function RailCard({ product, onOpen }) {
       <div className="cupwrap">
         <CupArt variant={product.art} />
       </div>
-      <h3>{product.name}</h3>
-      <div className="price">{listPrice(product)}</div>
+      <h3>{product.nombre}</h3>
+      <div className="price">{formatPrice(product.precio)}</div>
     </button>
   )
 }

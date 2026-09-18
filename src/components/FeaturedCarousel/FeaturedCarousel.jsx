@@ -61,7 +61,7 @@ export default function FeaturedCarousel({ products, onOpen }) {
             key={product.id}
             type="button"
             className={'carousel-dot' + (i === activeIndex ? ' active' : '')}
-            aria-label={`Ir a ${product.name}`}
+            aria-label={`Ir a ${product.nombre}`}
             aria-current={i === activeIndex}
             onClick={() => goTo(i)}
           />

@@ -1,4 +1,3 @@
-import logo from '../../assets/logo-borabora.png'
 import { useNow } from '../../utils/useNow'
 import { isOpenNow } from '../../utils/schedule'
 import './TopBar.css'
@@ -9,7 +8,7 @@ export default function TopBar() {
 
   return (
     <header className="topbar">
-      <img className="logo-img" src={logo} alt="BoraBora" />
+      <span className="logo-text">Patrick's JK</span>
       <div className={open ? 'openpill' : 'openpill openpill-closed'}>
         <span className="dot"></span>
         {open ? 'Abierto' : 'Cerrado'}

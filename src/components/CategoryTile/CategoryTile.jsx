@@ -1,21 +1,13 @@
-import { IconGranizados, IconMicheladas, IconPeceras, IconLicor } from '../Icons'
+import { IconBottle } from '../Icons'
 import './CategoryTile.css'
 
-const CATEGORY_ICONS = {
-  granizados: IconGranizados,
-  micheladas: IconMicheladas,
-  peceras: IconPeceras,
-  licor: IconLicor,
-}
-
-export default function CategoryTile({ category, onOpen }) {
-  const Icon = CATEGORY_ICONS[category.key]
+export default function CategoryTile({ category, count, onOpen }) {
   return (
-    <button className="cat-tile" onClick={() => onOpen(category.key)}>
-      <Icon />
+    <button className="cat-tile" onClick={() => onOpen(category)}>
+      <IconBottle />
       <span>
-        <b>{category.label}</b>
-        <span>{category.countLabel}</span>
+        <b>{category}</b>
+        <span>{count} producto{count === 1 ? '' : 's'}</span>
       </span>
     </button>
   )
