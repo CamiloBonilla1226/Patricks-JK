@@ -82,6 +82,17 @@ export function IconClock(props) {
   )
 }
 
+export function IconRoulette(props) {
+  return (
+    <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" {...props}>
+      <path d="M12 2.5v2.3" />
+      <circle cx="12" cy="13" r="8" />
+      <path d="M12 8v5l4 2.3" />
+      <circle cx="12" cy="13" r="0.9" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
 export function IconSearch(props) {
   return (
     <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" {...props}>
