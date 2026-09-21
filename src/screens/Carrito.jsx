@@ -1,17 +1,46 @@
 import { useMemo, useState } from 'react'
 import { IconCart, IconTrash, IconWhatsapp } from '../components/Icons'
+import FeaturedCarousel from '../components/FeaturedCarousel'
 import { useCart } from '../context/CartContext'
+import { useDisponibilidad } from '../context/DisponibilidadContext'
+import { resolveProductAvailability } from '../utils/availability'
+import { PRODUCTS } from '../data/products'
 import { formatPrice } from '../utils/format'
 import { buildWhatsAppOrderLink } from '../utils/whatsapp'
 
 const COMMENT_MAX_LENGTH = 300
+const SUGGESTIONS_MAX_PRICE = 20000
+const SUGGESTIONS_COUNT = 5
 
-export default function Carrito() {
+// Baraja tipo Fisher-Yates, para mostrar una selección al azar de productos
+// económicos cada vez que se entra al carrito.
+function shuffle(array) {
+  const result = [...array]
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[result[i], result[j]] = [result[j], result[i]]
+  }
+  return result
+}
+
+export default function Carrito({ onOpenProduct }) {
   const { items, decrementItem } = useCart()
+  const { isAvailable } = useDisponibilidad()
   const [comment, setComment] = useState('')
 
   const total = useMemo(() => items.reduce((sum, item) => sum + item.precio * item.cantidad, 0), [items])
   const whatsappLink = useMemo(() => buildWhatsAppOrderLink(items, total, comment), [items, total, comment])
+
+  // Se calcula una sola vez al entrar al carrito, para que la selección no
+  // cambie mientras el cliente escribe un comentario o agrega productos.
+  const [suggestedProducts] = useState(() => {
+    const available = PRODUCTS.map((product) => resolveProductAvailability(product, isAvailable)).filter(
+      (product) => product.estado === 'disponible' && product.precio < SUGGESTIONS_MAX_PRICE,
+    )
+    return shuffle(available).slice(0, SUGGESTIONS_COUNT)
+  })
+  const cartProductIds = useMemo(() => new Set(items.map((item) => item.productId)), [items])
+  const suggestionsToShow = suggestedProducts.filter((product) => !cartProductIds.has(product.id))
 
   return (
     <section className="screen" id="tab-carrito">
@@ -72,6 +101,15 @@ export default function Carrito() {
               <IconWhatsapp />
               Enviar pedido por WhatsApp
             </a>
+          </>
+        )}
+
+        {suggestionsToShow.length > 0 && (
+          <>
+            <div className="block-title">
+              <h2>¿Quieres agregar algo más?</h2>
+            </div>
+            <FeaturedCarousel products={suggestionsToShow} onOpen={onOpenProduct} />
           </>
         )}
       </div>

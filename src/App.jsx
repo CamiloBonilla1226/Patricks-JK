@@ -84,7 +84,7 @@ function App() {
           {activeTab === 'menu' && (
             <Menu activeCategory={activeCategory} onChangeCategory={setActiveCategory} onOpenProduct={setOpenProductId} />
           )}
-          {activeTab === 'carrito' && <Carrito />}
+          {activeTab === 'carrito' && <Carrito onOpenProduct={setOpenProductId} />}
         </div>
       </main>
 
