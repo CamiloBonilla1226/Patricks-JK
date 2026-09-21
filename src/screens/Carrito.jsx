@@ -7,7 +7,7 @@ import { buildWhatsAppOrderLink } from '../utils/whatsapp'
 const COMMENT_MAX_LENGTH = 300
 
 export default function Carrito() {
-  const { items, removeItem } = useCart()
+  const { items, decrementItem } = useCart()
   const [comment, setComment] = useState('')
 
   const total = useMemo(() => items.reduce((sum, item) => sum + item.precio * item.cantidad, 0), [items])
@@ -40,7 +40,7 @@ export default function Carrito() {
                   <button
                     type="button"
                     className="cart-item-remove"
-                    onClick={() => removeItem(item.id)}
+                    onClick={() => decrementItem(item.id)}
                     aria-label={`Quitar ${item.nombre} del carrito`}
                   >
                     <IconTrash />

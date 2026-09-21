@@ -25,6 +25,20 @@ function cartReducer(state, action) {
     }
     case 'REMOVE_ITEM':
       return { ...state, items: state.items.filter((item) => item.id !== action.id) }
+    case 'DECREMENT_ITEM': {
+      // Resta una unidad a la línea; si llega a 0, se quita la línea completa.
+      const existing = state.items.find((item) => item.id === action.id)
+      if (!existing) return state
+      if (existing.cantidad <= 1) {
+        return { ...state, items: state.items.filter((item) => item.id !== action.id) }
+      }
+      return {
+        ...state,
+        items: state.items.map((item) =>
+          item.id === action.id ? { ...item, cantidad: item.cantidad - 1 } : item,
+        ),
+      }
+    }
     default:
       return state
   }
@@ -42,6 +56,7 @@ export function CartProvider({ children }) {
       total,
       addItem: (item) => dispatch({ type: 'ADD_ITEM', item }),
       removeItem: (id) => dispatch({ type: 'REMOVE_ITEM', id }),
+      decrementItem: (id) => dispatch({ type: 'DECREMENT_ITEM', id }),
     }
   }, [state.items])
 
