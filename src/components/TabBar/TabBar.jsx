@@ -31,7 +31,7 @@ export default function TabBar({ activeTab, onChangeTab, swipeHandlers }) {
         <span>Menú</span>
       </button>
       <button className={activeTab === 'carrito' ? 'active' : ''} onClick={() => onChangeTab('carrito')}>
-        <IconCart className={bump ? 'bump' : ''} />
+        <IconCart className={'ico' + (bump ? ' bump' : '')} />
         <span className={'tab-badge' + (bump ? ' bump' : '')} hidden={count === 0}>
           {count}
         </span>
