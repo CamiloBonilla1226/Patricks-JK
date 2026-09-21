@@ -15,6 +15,12 @@ export default function ProductCard({ product, onOpen }) {
   function handleQuickAdd(e) {
     e.stopPropagation()
     if (!disponible) return
+    // Si el producto tiene sabores para elegir, el "+" rápido no puede
+    // agregarlo directo: se abre la ficha para que el cliente elija primero.
+    if (product.sabores?.length) {
+      onOpen(product.id)
+      return
+    }
     addItem({
       productId: product.id,
       nombre: product.nombre,
