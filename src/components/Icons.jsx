@@ -143,3 +143,11 @@ export function IconPlus(props) {
     </svg>
   )
 }
+
+export function IconCheck(props) {
+  return (
+    <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" {...props}>
+      <path d="M5 12.5l4.3 4.3L19 7" />
+    </svg>
+  )
+}

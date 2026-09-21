@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import CupArt from '../CupArt'
-import { IconPlus } from '../Icons'
+import { IconPlus, IconCheck } from '../Icons'
 import { useCart } from '../../context/CartContext'
 import { formatPrice } from '../../utils/format'
 import './ProductCard.css'
 
-const QUICK_ADD_FEEDBACK_MS = 1200
+const QUICK_ADD_FEEDBACK_MS = 500
 
 export default function ProductCard({ product, onOpen }) {
   const { addItem } = useCart()
@@ -52,7 +52,7 @@ export default function ProductCard({ product, onOpen }) {
         aria-disabled={!disponible}
         aria-label={`Agregar ${product.nombre} al carrito`}
       >
-        <IconPlus />
+        {added ? <IconCheck /> : <IconPlus />}
       </button>
     </div>
   )
