@@ -1,4 +1,5 @@
 import { createContext, useContext, useMemo, useReducer } from 'react'
+import { playAddToCartSound } from '../utils/sound'
 
 const CartContext = createContext(null)
 
@@ -24,7 +25,10 @@ export function CartProvider({ children }) {
       items: state.items,
       count: state.items.length,
       total,
-      addItem: (item) => dispatch({ type: 'ADD_ITEM', item: { ...item, id: crypto.randomUUID() } }),
+      addItem: (item) => {
+        playAddToCartSound()
+        dispatch({ type: 'ADD_ITEM', item: { ...item, id: crypto.randomUUID() } })
+      },
       removeItem: (id) => dispatch({ type: 'REMOVE_ITEM', id }),
     }
   }, [state.items])

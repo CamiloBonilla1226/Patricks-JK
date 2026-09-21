@@ -64,3 +64,24 @@
 .tab-badge[hidden] {
   display: none;
 }
+.tabbar button .ico.bump,
+.tab-badge.bump {
+  animation: tab-bump 320ms ease;
+}
+@keyframes tab-bump {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.35);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tabbar button .ico.bump,
+  .tab-badge.bump {
+    animation: none;
+  }
+}
