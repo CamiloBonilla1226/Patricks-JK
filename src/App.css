@@ -387,6 +387,15 @@ main {
   font-weight: 800;
   font-size: 13.5px;
 }
+.cart-item-qty {
+  flex: none;
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--amber);
+  background: var(--amber-tint);
+  border: 1px solid var(--border);
+  padding: 1px 6px;
+}
 .cart-item .price {
   flex: none;
   font-size: 13px;

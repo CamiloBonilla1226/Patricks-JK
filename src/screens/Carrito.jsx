@@ -10,7 +10,7 @@ export default function Carrito() {
   const { items, removeItem } = useCart()
   const [comment, setComment] = useState('')
 
-  const total = useMemo(() => items.reduce((sum, item) => sum + item.precio, 0), [items])
+  const total = useMemo(() => items.reduce((sum, item) => sum + item.precio * item.cantidad, 0), [items])
   const whatsappLink = useMemo(() => buildWhatsAppOrderLink(items, total, comment), [items, total, comment])
 
   return (
@@ -35,7 +35,8 @@ export default function Carrito() {
               <div className="cart-item" key={item.id}>
                 <div className="row1">
                   <h3>{item.nombre}</h3>
-                  <div className="price">{formatPrice(item.precio)}</div>
+                  {item.cantidad > 1 && <span className="cart-item-qty">x{item.cantidad}</span>}
+                  <div className="price">{formatPrice(item.precio * item.cantidad)}</div>
                   <button
                     type="button"
                     className="cart-item-remove"
