@@ -51,7 +51,7 @@ export default function Inicio({ onOpenProduct, onGoToCategory }) {
         <h2>Categorías</h2>
       </div>
       <div className="cat-grid">
-        {CATEGORIES.map((c) => (
+        {CATEGORIES.filter((c) => c !== 'Bebidas').map((c) => (
           <CategoryTile
             key={c}
             category={c}
