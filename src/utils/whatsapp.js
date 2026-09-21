@@ -21,7 +21,8 @@ export function buildWhatsAppOrderLink(items, total, comment) {
 
   items.forEach((item, i) => {
     const qtyLabel = item.cantidad > 1 ? ` x${item.cantidad}` : ''
-    lines.push(`${i + 1}. *${item.nombre}*${qtyLabel}`)
+    const saborLabel = item.sabor ? ` (${item.sabor})` : ''
+    lines.push(`${i + 1}. *${item.nombre}${saborLabel}*${qtyLabel}`)
     lines.push(`   ${item.categoria} · ${formatPrice(item.precio * item.cantidad)}`)
     lines.push('')
   })

@@ -75,7 +75,7 @@ export default function Carrito({ onOpenProduct }) {
                     <IconTrash />
                   </button>
                 </div>
-                <p>{item.categoria}</p>
+                <p>{item.sabor ? `${item.categoria} · ${item.sabor}` : item.categoria}</p>
               </div>
             ))}
             <div className="cart-total">

@@ -7,9 +7,13 @@ const initialState = { items: [] }
 function cartReducer(state, action) {
   switch (action.type) {
     case 'ADD_ITEM': {
-      // Si el producto ya está en el carrito, se suma a esa misma línea en
-      // vez de crear una fila repetida.
-      const existing = state.items.find((item) => item.productId === action.item.productId)
+      // Si el producto (con el mismo sabor, cuando aplica) ya está en el
+      // carrito, se suma a esa misma línea en vez de crear una fila
+      // repetida. Dos sabores distintos del mismo producto quedan en filas
+      // separadas.
+      const existing = state.items.find(
+        (item) => item.productId === action.item.productId && item.sabor === action.item.sabor,
+      )
       if (existing) {
         return {
           ...state,

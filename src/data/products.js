@@ -7,6 +7,7 @@
  * @property {number} precio
  * @property {string} categoria
  * @property {'disponible'|'agotado'} estado
+ * @property {string[]} [sabores] - Si existe, el cliente debe elegir uno antes de agregar al carrito.
  */
 
 /** @type {Producto[]} */
@@ -48,7 +49,7 @@ export const PRODUCTS = [
   { id: 'mecato-mani-moto', nombre: 'Maní Moto', precio: 2500, categoria: 'Mecato', estado: 'disponible' },
   { id: 'mecato-traidet', nombre: 'Traidet', precio: 3000, categoria: 'Mecato', estado: 'disponible' },
   { id: 'mecato-chao', nombre: 'Chao', precio: 2500, categoria: 'Mecato', estado: 'disponible' },
-  { id: 'mecato-de-toditos', nombre: 'De Toditos (todos los sabores)', precio: 5000, categoria: 'Mecato', estado: 'disponible' },
+  { id: 'mecato-de-toditos', nombre: 'De Toditos', precio: 5000, categoria: 'Mecato', estado: 'disponible', sabores: ['Mix', 'BBQ', 'Limón', 'Natural', 'Pollo'] },
   { id: 'mecato-margarita-limon', nombre: 'Margarita Limón', precio: 5000, categoria: 'Mecato', estado: 'disponible' },
   { id: 'mecato-margarita-natural', nombre: 'Margarita Natural', precio: 5000, categoria: 'Mecato', estado: 'disponible' },
   { id: 'mecato-margarita-pollo', nombre: 'Margarita Pollo', precio: 5000, categoria: 'Mecato', estado: 'disponible' },
@@ -62,12 +63,12 @@ export const PRODUCTS = [
   { id: 'mecato-chochitos-pequenos', nombre: 'Chochitos Pequeños', precio: 3000, categoria: 'Mecato', estado: 'disponible' },
 
   // Bebidas
-  { id: 'bebida-electrolit', nombre: 'Electrolit (todos los sabores)', precio: 12000, categoria: 'Bebidas', estado: 'disponible' },
-  { id: 'bebida-gatorade', nombre: 'Gatorade (todos los sabores)', precio: 6000, categoria: 'Bebidas', estado: 'disponible' },
+  { id: 'bebida-electrolit', nombre: 'Electrolit', precio: 12000, categoria: 'Bebidas', estado: 'disponible', sabores: ['Uva', 'Fresa Kiwi', 'Jamaica', 'Maracuyá'] },
+  { id: 'bebida-gatorade', nombre: 'Gatorade', precio: 6000, categoria: 'Bebidas', estado: 'disponible', sabores: ['Rojo', 'Azul', 'Naranja'] },
   { id: 'bebida-soda-grande', nombre: 'Soda Grande', precio: 7000, categoria: 'Bebidas', estado: 'disponible' },
   { id: 'bebida-soda-pequena', nombre: 'Soda Pequeña', precio: 5000, categoria: 'Bebidas', estado: 'disponible' },
   { id: 'bebida-agua', nombre: 'Agua', precio: 2500, categoria: 'Bebidas', estado: 'disponible' },
-  { id: 'bebida-vive100', nombre: 'Vive 100 (todos los sabores)', precio: 5000, categoria: 'Bebidas', estado: 'disponible' },
+  { id: 'bebida-vive100', nombre: 'Vive 100', precio: 5000, categoria: 'Bebidas', estado: 'disponible', sabores: ['Original', 'Sandía'] },
 
   // Alcohol
   { id: 'alcohol-jose-cuervo', nombre: 'José Cuervo', precio: 90000, categoria: 'Alcohol', estado: 'disponible' },

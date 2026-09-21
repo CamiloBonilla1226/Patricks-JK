@@ -133,7 +133,7 @@
   appearance: none;
   cursor: pointer;
 }
-.opt[aria-pressed='true'] {
+.opt[aria-checked='true'] {
   border-color: var(--amber);
   color: var(--amber);
   background: var(--amber-tint);

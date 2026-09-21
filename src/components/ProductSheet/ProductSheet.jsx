@@ -20,8 +20,10 @@ export default function ProductSheet({ productId, onClose }) {
   const productBase = PRODUCTS.find((p) => p.id === productId)
   const product = resolveProductAvailability(productBase, isAvailable)
   const disponible = product.estado === 'disponible'
+  const requiereSabor = Boolean(product.sabores?.length)
 
   const [added, setAdded] = useState(false)
+  const [selectedSabor, setSelectedSabor] = useState(null)
 
   const sheetRef = useRef(null)
   const heroRef = useRef(null)
@@ -167,13 +169,16 @@ export default function ProductSheet({ productId, onClose }) {
 
   function handleAdd() {
     if (!disponible) return
+    if (requiereSabor && !selectedSabor) return
     addItem({
       productId: product.id,
       nombre: product.nombre,
       categoria: product.categoria,
       precio: product.precio,
+      sabor: requiereSabor ? selectedSabor : undefined,
     })
     setAdded(true)
+    setSelectedSabor(null)
     setTimeout(() => setAdded(false), 1500)
   }
 
@@ -197,6 +202,29 @@ export default function ProductSheet({ productId, onClose }) {
           <div className="sheet-body">
             <div className="field-label">Categoría</div>
             <p className="sheet-desc">{product.categoria}</p>
+
+            {requiereSabor && (
+              <div className="group">
+                <div className="group-label">
+                  <span>Sabor</span>
+                  {!selectedSabor && <span className="group-hint">Elige uno</span>}
+                </div>
+                <div className="opt-row" role="radiogroup" aria-label="Sabor">
+                  {product.sabores.map((sabor) => (
+                    <button
+                      key={sabor}
+                      type="button"
+                      className="opt"
+                      role="radio"
+                      aria-checked={selectedSabor === sabor}
+                      onClick={() => setSelectedSabor(sabor)}
+                    >
+                      {sabor}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
         <div className="sheet-footer">
@@ -204,7 +232,11 @@ export default function ProductSheet({ productId, onClose }) {
             <span>Total</span>
             <b>{formatPrice(product.precio)}</b>
           </div>
-          <button className="add-btn" onClick={handleAdd} disabled={!disponible || added}>
+          <button
+            className="add-btn"
+            onClick={handleAdd}
+            disabled={!disponible || added || (requiereSabor && !selectedSabor)}
+          >
             {!disponible ? 'Agotado' : added ? '¡Agregado!' : 'Agregar al carrito'}
           </button>
         </div>
