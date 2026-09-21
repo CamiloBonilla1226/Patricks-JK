@@ -87,21 +87,36 @@ main {
 
 /* ================= INICIO ================= */
 .roulette-banner {
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px;
+  padding: 13px 14px;
   margin-bottom: 18px;
-  background: linear-gradient(135deg, var(--amber) 0%, var(--amber-soft) 100%);
+  background: var(--navy-2);
   border: 1px solid var(--amber);
-  box-shadow: 0 0 14px 1px color-mix(in srgb, var(--amber) 35%, transparent);
-  animation: roulette-glow 2.5s ease-in-out infinite;
+  animation: roulette-glow 3s ease-in-out infinite;
+}
+.roulette-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  left: -60%;
+  width: 45%;
+  background: linear-gradient(
+    115deg,
+    transparent,
+    color-mix(in srgb, var(--amber-soft) 55%, transparent),
+    transparent
+  );
+  animation: roulette-shine 3.6s ease-in-out infinite;
 }
 .roulette-banner-icon {
   flex: none;
-  width: 30px;
-  height: 30px;
-  color: var(--ink-on-accent);
+  width: 28px;
+  height: 28px;
+  color: var(--amber);
 }
 .roulette-banner-text {
   display: flex;
@@ -113,25 +128,34 @@ main {
   font-weight: 700;
   font-size: 13px;
   line-height: 1.35;
-  color: var(--ink-on-accent);
+  color: var(--cream);
 }
 .roulette-banner-text span {
   font-size: 11px;
-  font-weight: 600;
-  color: var(--ink-on-accent);
-  opacity: 0.75;
+  font-weight: 700;
+  color: var(--amber-soft);
+}
+@keyframes roulette-shine {
+  0% {
+    left: -60%;
+  }
+  55%,
+  100% {
+    left: 130%;
+  }
 }
 @keyframes roulette-glow {
   0%,
   100% {
-    box-shadow: 0 0 10px 0 color-mix(in srgb, var(--amber) 30%, transparent);
+    box-shadow: 0 0 6px 0 color-mix(in srgb, var(--amber) 25%, transparent);
   }
   50% {
-    box-shadow: 0 0 22px 4px color-mix(in srgb, var(--amber) 55%, transparent);
+    box-shadow: 0 0 18px 2px color-mix(in srgb, var(--amber) 50%, transparent);
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .roulette-banner {
+  .roulette-banner,
+  .roulette-banner::after {
     animation: none;
   }
 }

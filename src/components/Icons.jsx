@@ -84,11 +84,11 @@ export function IconClock(props) {
 
 export function IconRoulette(props) {
   return (
-    <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" {...props}>
-      <path d="M12 2.5v2.3" />
-      <circle cx="12" cy="13" r="8" />
-      <path d="M12 8v5l4 2.3" />
-      <circle cx="12" cy="13" r="0.9" fill="currentColor" stroke="none" />
+    <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" {...props}>
+      <path d="M12 2.2l1.5 2.8h-3z" fill="currentColor" stroke="none" />
+      <circle cx="12" cy="13.6" r="8" />
+      <path d="M12 5.6v8M12 13.6l6.9-4M12 13.6l-6.9-4M12 13.6l6.9 4M12 13.6l-6.9 4" />
+      <circle cx="12" cy="13.6" r="1.6" fill="currentColor" stroke="none" />
     </svg>
   )
 }
@@ -98,6 +98,14 @@ export function IconSearch(props) {
     <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" {...props}>
       <circle cx="10.5" cy="10.5" r="6.5" />
       <path d="M20 20l-4.8-4.8" />
+    </svg>
+  )
+}
+
+export function IconPlus(props) {
+  return (
+    <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
+      <path d="M12 5v14M5 12h14" />
     </svg>
   )
 }

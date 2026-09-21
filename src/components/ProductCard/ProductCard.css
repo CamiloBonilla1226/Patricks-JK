@@ -1,11 +1,8 @@
 .card {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   align-items: center;
   width: 100%;
-  text-align: left;
-  appearance: none;
-  cursor: pointer;
   padding: 11px;
   background: var(--navy-2);
   border: 1px solid var(--border);
@@ -14,9 +11,27 @@
 .card:hover {
   border-color: var(--border-strong);
 }
-.card:focus-visible {
+.card-main {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+.card-main:disabled {
+  cursor: default;
+}
+.card-main:focus-visible {
   outline: 2px solid var(--amber);
-  outline-offset: -2px;
+  outline-offset: 2px;
 }
 .card .cupwrap {
   width: 54px;
@@ -55,4 +70,39 @@
   flex: none;
   color: var(--cream-dim);
   font-size: 15px;
+}
+.quick-add {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  appearance: none;
+  cursor: pointer;
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--amber);
+}
+.quick-add .ico {
+  width: 18px;
+  height: 18px;
+}
+.quick-add:hover {
+  border-color: var(--amber);
+}
+.quick-add:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+.quick-add:disabled {
+  cursor: default;
+  color: var(--cream-dim);
+  border-color: var(--border);
+}
+.quick-add.is-added {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: var(--navy);
 }

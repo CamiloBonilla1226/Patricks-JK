@@ -29,7 +29,7 @@ export default function Inicio({ onOpenProduct, onGoToCategory }) {
       <div className="roulette-banner">
         <IconRoulette className="roulette-banner-icon" />
         <div className="roulette-banner-text">
-          <strong>Gira la ruleta y gana un descuento en tu compra de hoy</strong>
+          <strong>Gira la ruleta y gana un descuento en tu compra</strong>
           <span>Compras desde $70.000</span>
         </div>
       </div>
