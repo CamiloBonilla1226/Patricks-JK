@@ -50,7 +50,7 @@ export const PRODUCTS = [
   { id: 'mecato-mani-moto', nombre: 'Maní Moto', precio: 2500, categoria: 'Mecato', estado: 'disponible' },
   { id: 'mecato-traidet', nombre: 'Traidet', precio: 3000, categoria: 'Mecato', estado: 'disponible' },
   { id: 'mecato-chao', nombre: 'Chao', precio: 2500, categoria: 'Mecato', estado: 'disponible' },
-  { id: 'mecato-de-toditos', nombre: 'De Toditos', precio: 5000, categoria: 'Mecato', estado: 'disponible', sabores: ['Mix', 'BBQ', 'Limón', 'Natural', 'Pollo'], imagen: '/productos/mecato-de-toditos.jpg' },
+  { id: 'mecato-de-toditos', nombre: 'De Toditos', precio: 5000, categoria: 'Mecato', estado: 'disponible', sabores: ['Mix', 'BBQ', 'Limón', 'Natural', 'Pollo'], imagen: '/productos/mecato-de-toditos.PNG' },
   { id: 'mecato-margarita-limon', nombre: 'Margarita Limón', precio: 5000, categoria: 'Mecato', estado: 'disponible' },
   { id: 'mecato-margarita-natural', nombre: 'Margarita Natural', precio: 5000, categoria: 'Mecato', estado: 'disponible' },
   { id: 'mecato-margarita-pollo', nombre: 'Margarita Pollo', precio: 5000, categoria: 'Mecato', estado: 'disponible' },
