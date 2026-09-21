@@ -1,7 +1,7 @@
 import FeaturedCarousel from '../components/FeaturedCarousel'
 import CategoryTile from '../components/CategoryTile'
 import StoreInfo from '../components/StoreInfo'
-import { IconRoulette } from '../components/Icons'
+import { IconGift } from '../components/Icons'
 import { PRODUCTS, CATEGORIES } from '../data/products'
 import { useDisponibilidad } from '../context/DisponibilidadContext'
 import { resolveProductAvailability } from '../utils/availability'
@@ -27,7 +27,7 @@ export default function Inicio({ onOpenProduct, onGoToCategory }) {
           promocional; la rueda, el modal y la lógica de elegibilidad se
           implementan en una tarea aparte. */}
       <div className="roulette-banner">
-        <IconRoulette className="roulette-banner-icon" />
+        <IconGift className="roulette-banner-icon" />
         <div className="roulette-banner-text">
           <strong>Gira la ruleta y gana un descuento en tu compra</strong>
           <span>Compras desde $70.000</span>

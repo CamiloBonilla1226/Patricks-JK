@@ -82,13 +82,47 @@ export function IconClock(props) {
   )
 }
 
-export function IconRoulette(props) {
+export function IconGift(props) {
   return (
-    <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" {...props}>
-      <path d="M12 2.2l1.5 2.8h-3z" fill="currentColor" stroke="none" />
-      <circle cx="12" cy="13.6" r="8" />
-      <path d="M12 5.6v8M12 13.6l6.9-4M12 13.6l-6.9-4M12 13.6l6.9 4M12 13.6l-6.9 4" />
-      <circle cx="12" cy="13.6" r="1.6" fill="currentColor" stroke="none" />
+    <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" {...props}>
+      <rect x="4" y="8.3" width="16" height="4" rx="0.6" />
+      <rect x="5.4" y="12.3" width="13.2" height="8.7" rx="0.6" />
+      <path d="M12 8.3v12.7" />
+      <path d="M12 8.3c-1.6 0-3.7-.9-3.7-2.9A2 2 0 0 1 10.2 3.4c2 0 3.1 2.5 3.5 4.5" />
+      <path d="M12 8.3c1.6 0 3.7-.9 3.7-2.9a2 2 0 0 0-1.9-2c-2 0-3.1 2.5-3.5 4.5" />
+    </svg>
+  )
+}
+
+export function IconBeerMug(props) {
+  return (
+    <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" {...props}>
+      <path d="M5.5 7.5h9V19a1.2 1.2 0 0 1-1.2 1.2H6.7A1.2 1.2 0 0 1 5.5 19V7.5Z" />
+      <path d="M14.5 9.5h1.8a2 2 0 0 1 2 2v2.6a2 2 0 0 1-2 2h-1.8" />
+      <path d="M5.5 7.5c0-1.8 1.4-3.7 3.2-4" />
+      <path d="M8 4.3c.4-.9 1.7-1.4 2.6-.7" />
+      <path d="M7 11.5h6" />
+    </svg>
+  )
+}
+
+export function IconCocktail(props) {
+  return (
+    <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" {...props}>
+      <path d="M4.5 4.5h15L12.8 13v6" />
+      <path d="M9.3 19h5.4" />
+      <circle cx="15.2" cy="6.6" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
+export function IconSnack(props) {
+  return (
+    <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" {...props}>
+      <path d="M7.3 3.5 6 5.3l1.3 1.3-1.3 1.4h11.4L16 6.6l1.3-1.3-1.3-1.8" />
+      <path d="M6 7v11.5a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7" />
+      <path d="M9.5 11.5c.9.7 1.6.7 2.5 0s1.6-.7 2.5 0" />
+      <path d="M9.5 15c.9.7 1.6.7 2.5 0s1.6-.7 2.5 0" />
     </svg>
   )
 }
