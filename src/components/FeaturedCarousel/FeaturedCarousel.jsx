@@ -6,7 +6,7 @@ import './FeaturedCarousel.css'
 // calcular a qué tarjeta corresponde cada posición de scroll.
 const CARD_STEP = 136
 
-export default function FeaturedCarousel({ products, onOpen }) {
+export default function FeaturedCarousel({ products, onOpen, showQuickAdd = false }) {
   const trackRef = useRef(null)
   const [activeIndex, setActiveIndex] = useState(0)
 
@@ -52,7 +52,7 @@ export default function FeaturedCarousel({ products, onOpen }) {
     <div className="carousel">
       <div className="carousel-track" ref={trackRef} data-no-swipe>
         {products.map((product) => (
-          <RailCard key={product.id} product={product} onOpen={onOpen} />
+          <RailCard key={product.id} product={product} onOpen={onOpen} showQuickAdd={showQuickAdd} />
         ))}
       </div>
       <div className="carousel-dots">

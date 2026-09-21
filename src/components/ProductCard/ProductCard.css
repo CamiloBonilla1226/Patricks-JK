@@ -38,7 +38,8 @@
   height: 68px;
   overflow: hidden;
 }
-.card.is-out .cupwrap svg {
+.card.is-out .cupwrap svg,
+.card.is-out .cupwrap img {
   filter: grayscale(1) brightness(0.6);
 }
 .card-body {

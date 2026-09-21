@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import CupArt from '../CupArt'
+import ProductImage from '../ProductImage'
 import { PRODUCTS } from '../../data/products'
 import { useCart } from '../../context/CartContext'
 import { useDisponibilidad } from '../../context/DisponibilidadContext'
@@ -192,7 +192,7 @@ export default function ProductSheet({ productId, onClose }) {
               ✕
             </button>
             <div className="cupwrap">
-              <CupArt variant={product.art} />
+              <ProductImage product={product} />
             </div>
           </div>
           <div className="sheet-top">

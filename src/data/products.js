@@ -8,6 +8,7 @@
  * @property {string} categoria
  * @property {'disponible'|'agotado'} estado
  * @property {string[]} [sabores] - Si existe, el cliente debe elegir uno antes de agregar al carrito.
+ * @property {string} [imagen] - Ruta pública de la foto (public/productos/<id>.ext). Si no existe, se usa el ícono de respaldo.
  */
 
 /** @type {Producto[]} */
@@ -49,7 +50,7 @@ export const PRODUCTS = [
   { id: 'mecato-mani-moto', nombre: 'Maní Moto', precio: 2500, categoria: 'Mecato', estado: 'disponible' },
   { id: 'mecato-traidet', nombre: 'Traidet', precio: 3000, categoria: 'Mecato', estado: 'disponible' },
   { id: 'mecato-chao', nombre: 'Chao', precio: 2500, categoria: 'Mecato', estado: 'disponible' },
-  { id: 'mecato-de-toditos', nombre: 'De Toditos', precio: 5000, categoria: 'Mecato', estado: 'disponible', sabores: ['Mix', 'BBQ', 'Limón', 'Natural', 'Pollo'] },
+  { id: 'mecato-de-toditos', nombre: 'De Toditos', precio: 5000, categoria: 'Mecato', estado: 'disponible', sabores: ['Mix', 'BBQ', 'Limón', 'Natural', 'Pollo'], imagen: '/productos/mecato-de-toditos.jpg' },
   { id: 'mecato-margarita-limon', nombre: 'Margarita Limón', precio: 5000, categoria: 'Mecato', estado: 'disponible' },
   { id: 'mecato-margarita-natural', nombre: 'Margarita Natural', precio: 5000, categoria: 'Mecato', estado: 'disponible' },
   { id: 'mecato-margarita-pollo', nombre: 'Margarita Pollo', precio: 5000, categoria: 'Mecato', estado: 'disponible' },

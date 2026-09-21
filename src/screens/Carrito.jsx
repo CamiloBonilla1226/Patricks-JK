@@ -104,12 +104,12 @@ export default function Carrito({ onOpenProduct }) {
           </>
         )}
 
-        {suggestionsToShow.length > 0 && (
+        {items.length > 0 && suggestionsToShow.length > 0 && (
           <>
             <div className="block-title">
               <h2>¿Quieres agregar algo más?</h2>
             </div>
-            <FeaturedCarousel products={suggestionsToShow} onOpen={onOpenProduct} />
+            <FeaturedCarousel products={suggestionsToShow} onOpen={onOpenProduct} showQuickAdd />
           </>
         )}
       </div>

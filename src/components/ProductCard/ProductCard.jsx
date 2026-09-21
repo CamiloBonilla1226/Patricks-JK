@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import CupArt from '../CupArt'
+import ProductImage from '../ProductImage'
 import { IconPlus, IconCheck } from '../Icons'
 import { useCart } from '../../context/CartContext'
 import { formatPrice } from '../../utils/format'
@@ -35,7 +35,7 @@ export default function ProductCard({ product, onOpen }) {
     <div className={'card' + (disponible ? '' : ' is-out')}>
       <button className="card-main" onClick={() => onOpen(product.id)} disabled={!disponible}>
         <div className="cupwrap">
-          <CupArt variant={product.art} />
+          <ProductImage product={product} />
         </div>
         <div className="card-body">
           <div className="card-top">
