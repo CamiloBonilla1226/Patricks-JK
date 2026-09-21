@@ -46,7 +46,7 @@ export const PRODUCTS = [
   { id: 'aperitivo-like-fresh-apple', nombre: 'Like Fresh Apple', precio: 5000, categoria: 'Aperitivos', estado: 'disponible' },
 
   // Mecato
-  { id: 'mecato-bombones', nombre: 'Bombones', precio: 1000, categoria: 'Mecato', estado: 'disponible' },
+  { id: 'mecato-bombones', nombre: 'Bombones', precio: 1000, categoria: 'Mecato', estado: 'disponible', imagen: '/productos/mecato-bombones.png' },
   { id: 'mecato-mani-moto', nombre: 'Maní Moto', precio: 2500, categoria: 'Mecato', estado: 'disponible' },
   { id: 'mecato-traidet', nombre: 'Traidet', precio: 3000, categoria: 'Mecato', estado: 'disponible' },
   { id: 'mecato-chao', nombre: 'Chao', precio: 2500, categoria: 'Mecato', estado: 'disponible' },
