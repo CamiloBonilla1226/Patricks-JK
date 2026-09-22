@@ -83,30 +83,33 @@
 }
 
 /* Ancho y separación en % (no px fijos) para que el tamaño del texto siga
-   creciendo o encogiendo junto con el diámetro real de la rueda. Con solo 8
-   segmentos (antes 16) cada uno abarca el doble de ángulo, así que el
-   recuadro de texto y la letra pueden ser bastante más grandes. */
+   creciendo o encogiendo junto con el diámetro real de la rueda. Cada
+   segmento es una porción angular de 45° (con 8 premios) que se va
+   ANGOSTANDO hacia el centro — un recuadro de texto rectangular más ancho
+   que eso invade el segmento vecino. 34% de ancho, anclado bien cerca del
+   borde exterior (donde el segmento es más ancho), es lo que cabe sin
+   pasarse para 8 segmentos. */
 .ruleta-label {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 42%;
-  margin-left: -21%;
+  width: 34%;
+  margin-left: -17%;
   height: 50%;
   transform-origin: 50% 0%;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding-bottom: 8%;
+  padding-bottom: 4%;
   pointer-events: none;
 }
 .ruleta-label span {
   display: block;
   text-align: center;
   font-family: 'Work Sans', sans-serif;
-  font-size: clamp(13px, 3.6vw, 18px);
+  font-size: clamp(10px, 2.8vw, 13px);
   font-weight: 700;
-  line-height: 1.25;
+  line-height: 1.2;
   letter-spacing: 0.1px;
 }
 

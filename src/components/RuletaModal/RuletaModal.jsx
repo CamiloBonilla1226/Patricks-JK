@@ -18,6 +18,29 @@ const SPIN_DURATION_MS = 4000
 const SEGMENT_COLORS = ['var(--cream-dim)', 'var(--amber)', 'var(--teal)']
 const SEGMENT_TEXT_COLOR = 'var(--ink-on-accent)'
 
+// Textos cortos SOLO para el rótulo que se ve encima de cada segmento de la
+// rueda — el resultado que se muestra debajo al terminar de girar, lo que
+// se guarda en Supabase (registrarGiro) y lo que se usa en el mensaje de
+// WhatsApp siguen usando el texto completo y exacto de premiosRuleta.js.
+// Esto es solo para que el texto entre en el espacio del segmento sin
+// invadir el de al lado.
+const TEXTO_CORTO_RUEDA = {
+  'Ganaste 1 Poker': '1 Poker',
+  'Ganaste $30.000': '$30.000',
+  'Ganaste $10.000 redimible en punto físico': '$10.000 en punto físico',
+  '10% en el total de la cuenta': '10% en la cuenta',
+  'Ganaste un bombón': 'Un bombón',
+  '10% descuento en un producto seleccionado': '10% en un producto',
+  'Ganaste 1 Six': '1 Six',
+  'Ganaste un agua': 'Un agua',
+  '5% en el total de la cuenta': '5% en la cuenta',
+  'Ganaste un premio sorpresa': 'Premio sorpresa',
+}
+
+function textoCortoParaRueda(texto) {
+  return TEXTO_CORTO_RUEDA[texto] ?? texto
+}
+
 /**
  * Calcula la rotación total (en grados, siempre creciente respecto a la
  * anterior) para que el segmento `targetIndex` quede exactamente bajo el
@@ -176,18 +199,32 @@ export default function RuletaModal({ deviceId, premios, onClose, onCompleted })
               }}
               onTransitionEnd={handleTransitionEnd}
             >
-              {premios.map((premio, i) => (
-                <div
-                  key={premio.id}
-                  className="ruleta-label"
-                  style={{
-                    transform: `rotate(${i * segmentDeg + segmentDeg / 2}deg)`,
-                    color: SEGMENT_TEXT_COLOR,
-                  }}
-                >
-                  <span>{premio.texto}</span>
-                </div>
-              ))}
+              {premios.map((premio, i) => {
+                // +180°: el div del rótulo, antes de rotar, apunta hacia
+                // ABAJO (su mitad ocupa desde el centro hacia el borde
+                // inferior), pero el conic-gradient mide sus ángulos desde
+                // ARRIBA. Sin este ajuste, cada rótulo terminaba sobre el
+                // segmento opuesto al que en verdad le correspondía (el
+                // texto no coincidía con el color real bajo el puntero al
+                // terminar de girar).
+                const anguloDiv = (i * segmentDeg + segmentDeg / 2 + 180) % 360
+                // Ese mismo giro deja el texto boca abajo en la mitad
+                // izquierda de la rueda (ángulos entre 90° y 270°). Se
+                // corrige volteando solo el texto (no el div que lo ubica),
+                // así el rótulo queda en el mismo lugar pero legible.
+                const volteado = anguloDiv > 90 && anguloDiv < 270
+                return (
+                  <div
+                    key={premio.id}
+                    className="ruleta-label"
+                    style={{ transform: `rotate(${anguloDiv}deg)`, color: SEGMENT_TEXT_COLOR }}
+                  >
+                    <span style={volteado ? { transform: 'rotate(180deg)' } : undefined}>
+                      {textoCortoParaRueda(premio.texto)}
+                    </span>
+                  </div>
+                )
+              })}
             </div>
           </div>
 

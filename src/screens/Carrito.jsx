@@ -97,12 +97,21 @@ export default function Carrito({ onOpenProduct, onGoToInicio }) {
     }
   }
 
-  function handleRuletaCompletada() {
-    // El dispositivo pasó de "no ha jugado" a "ya jugó": la verificación
-    // adelantada quedó desactualizada, así que se descarta para que la
-    // próxima vez se vuelva a consultar (leerá el caché local al instante).
+  // Se usa para CUALQUIER forma de cerrar el modal de la ruleta (botón X,
+  // Escape, o "Continuar"): si en esta sesión sí llegó a jugar, la
+  // verificación adelantada de arriba quedó con la respuesta vieja de "no ha
+  // jugado" cacheada — sin este reseteo, cerrar con la X en vez de
+  // "Continuar" dejaba dar clic en "Confirmar pedido" de nuevo y reabría la
+  // ruleta para un segundo giro. Al ponerlo en null, la próxima vez se
+  // vuelve a consultar (lo que, si ya jugó, ahora resuelve al instante desde
+  // el caché local en localStorage).
+  function cerrarRuleta() {
     verificacionRuletaRef.current = null
     setRuletaSesion(null)
+  }
+
+  function handleRuletaCompletada() {
+    cerrarRuleta()
     setShowEntregaForm(true)
   }
 
@@ -205,7 +214,7 @@ export default function Carrito({ onOpenProduct, onGoToInicio }) {
         <RuletaModal
           deviceId={ruletaSesion.deviceId}
           premios={ruletaSesion.premios}
-          onClose={() => setRuletaSesion(null)}
+          onClose={cerrarRuleta}
           onCompleted={handleRuletaCompletada}
         />
       )}
