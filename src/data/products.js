@@ -14,11 +14,11 @@
 /** @type {Producto[]} */
 export const PRODUCTS = [
   // Cervezas — six packs
-  { id: 'cerveza-sixpack-poker', nombre: 'Six Pack Poker', precio: 30000, categoria: 'Cervezas', estado: 'disponible' },
-  { id: 'cerveza-sixpack-aguila-light', nombre: 'Six Pack Águila Light', precio: 30000, categoria: 'Cervezas', estado: 'disponible' },
-  { id: 'cerveza-sixpack-aguila-original', nombre: 'Six Pack Águila Original', precio: 30000, categoria: 'Cervezas', estado: 'disponible' },
-  { id: 'cerveza-sixpack-budweiser', nombre: 'Six Pack Budweiser', precio: 30000, categoria: 'Cervezas', estado: 'disponible' },
-  { id: 'cerveza-sixpack-heineken', nombre: 'Six Pack Heineken', precio: 30000, categoria: 'Cervezas', estado: 'disponible' },
+  { id: 'cerveza-sixpack-poker', nombre: 'Six Pack Poker', precio: 30000, categoria: 'Cervezas', estado: 'disponible', imagen: '/productos/cerveza-sixpack-poker.webp' },
+  { id: 'cerveza-sixpack-aguila-light', nombre: 'Six Pack Águila Light', precio: 30000, categoria: 'Cervezas', estado: 'disponible', imagen: '/productos/cerveza-sixpack-aguila-light.webp' },
+  { id: 'cerveza-sixpack-aguila-original', nombre: 'Six Pack Águila Original', precio: 30000, categoria: 'Cervezas', estado: 'disponible', imagen: '/productos/cerveza-sixpack-aguila-original.webp' },
+  { id: 'cerveza-sixpack-budweiser', nombre: 'Six Pack Budweiser', precio: 30000, categoria: 'Cervezas', estado: 'disponible', imagen: '/productos/cerveza-sixpack-budweiser.webp' },
+  { id: 'cerveza-sixpack-heineken', nombre: 'Six Pack Heineken', precio: 30000, categoria: 'Cervezas', estado: 'disponible', imagen: '/productos/cerveza-sixpack-heineken.webp' },
 
   // Cervezas — unidad
   { id: 'cerveza-poker', nombre: 'Poker', precio: 5000, categoria: 'Cervezas', estado: 'disponible' },
