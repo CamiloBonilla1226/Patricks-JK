@@ -20,7 +20,11 @@
 }
 .rail-card .cupwrap {
   width: 100%;
-  height: 64px;
+  /* Las fotos de producto son cuadradas (ver ProductImage.jsx) — el
+     recuadro debe serlo también, si no, "cover" recorta la parte de arriba
+     o de abajo de la imagen para llenar un alto fijo que no coincide con
+     su proporción. */
+  aspect-ratio: 1;
   display: grid;
   place-items: center;
   margin-bottom: 8px;

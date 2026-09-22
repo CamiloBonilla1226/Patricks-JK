@@ -29,7 +29,7 @@ function shuffle(array) {
 }
 
 export default function Carrito({ onOpenProduct, onGoToInicio }) {
-  const { items, decrementItem, clearCart } = useCart()
+  const { items, decrementItem, clearCart, premio } = useCart()
   const { isAvailable } = useDisponibilidad()
   const [comment, setComment] = useState('')
   const [showEntregaForm, setShowEntregaForm] = useState(false)
@@ -37,7 +37,10 @@ export default function Carrito({ onOpenProduct, onGoToInicio }) {
   const [ruletaDeviceId, setRuletaDeviceId] = useState(null)
 
   const total = useMemo(() => items.reduce((sum, item) => sum + item.precio * item.cantidad, 0), [items])
-  const whatsappLink = useMemo(() => buildWhatsAppOrderLink(items, total, comment), [items, total, comment])
+  const whatsappLink = useMemo(
+    () => buildWhatsAppOrderLink(items, total, comment, premio),
+    [items, total, comment, premio],
+  )
 
   // Adelanta la consulta a Supabase apenas el carrito alcanza el mínimo de
   // la ruleta, en vez de esperar a que el cliente haga clic en "Confirmar

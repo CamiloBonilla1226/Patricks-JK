@@ -13,10 +13,12 @@ const SEGMENT_DEG = 360 / PREMIOS_RULETA.length
 const EXTRA_SPINS = 5 // vueltas completas antes de frenar en el premio elegido
 const SPIN_DURATION_MS = 4000
 
-// Colores del segmento alternando 3 tonos de la paleta, y el color de texto
-// que mejor contrasta sobre cada uno (todo tomado de tokens.css).
-const SEGMENT_COLORS = ['var(--navy-2)', 'var(--amber)', 'var(--teal)']
-const SEGMENT_TEXT_COLORS = ['var(--cream)', 'var(--ink-on-accent)', 'var(--ink-on-accent)']
+// Colores del segmento alternando 3 tonos claros de la paleta (nada de
+// --navy-2: sobre el fondo negro del modal se confundía con el backdrop y
+// esos segmentos parecían "huecos" negros). Los tres son lo bastante claros
+// como para usar siempre el mismo texto oscuro de contraste.
+const SEGMENT_COLORS = ['var(--cream-dim)', 'var(--amber)', 'var(--teal)']
+const SEGMENT_TEXT_COLOR = 'var(--ink-on-accent)'
 
 const wheelBackground = `conic-gradient(${PREMIOS_RULETA.map((_, i) => {
   const color = SEGMENT_COLORS[i % SEGMENT_COLORS.length]
@@ -168,7 +170,7 @@ export default function RuletaModal({ deviceId, onClose, onCompleted }) {
                 className="ruleta-label"
                 style={{
                   transform: `rotate(${i * SEGMENT_DEG + SEGMENT_DEG / 2}deg)`,
-                  color: SEGMENT_TEXT_COLORS[i % SEGMENT_TEXT_COLORS.length],
+                  color: SEGMENT_TEXT_COLOR,
                 }}
               >
                 <span>{premio.texto}</span>

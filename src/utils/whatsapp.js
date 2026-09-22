@@ -15,8 +15,12 @@ export function buildWhatsAppContactLink() {
  * precio ya con la promo aplicada, el total y el comentario si hay) y
  * devuelve el link de WhatsApp con ese texto precargado — el cliente solo
  * tiene que revisarlo y darle enviar, nunca se manda nada sin que él lo vea.
+ *
+ * @param {{texto: string}|null} [premio] - Premio ganado en la ruleta, si
+ * aplica. Solo se muestra en el mensaje; el total del pedido no cambia (el
+ * negocio aplica el descuento manualmente al confirmar por WhatsApp).
  */
-export function buildWhatsAppOrderLink(items, total, comment) {
+export function buildWhatsAppOrderLink(items, total, comment, premio) {
   const lines = ["🥃 *Nuevo pedido — Patrick's JK*", '']
 
   items.forEach((item, i) => {
@@ -28,6 +32,11 @@ export function buildWhatsAppOrderLink(items, total, comment) {
   })
 
   lines.push(`*Total: ${formatPrice(total)}*`)
+
+  if (premio && premio.texto !== 'Perdiste') {
+    lines.push('')
+    lines.push(`🎉 *Premio de la ruleta:* ${premio.texto}`)
+  }
 
   const trimmedComment = comment.trim()
   if (trimmedComment) {
