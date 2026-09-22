@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { IconCart, IconTrash, IconWhatsapp } from '../components/Icons'
 import FeaturedCarousel from '../components/FeaturedCarousel'
 import EntregaForm from '../components/EntregaForm'
@@ -39,26 +39,50 @@ export default function Carrito({ onOpenProduct, onGoToInicio }) {
   const total = useMemo(() => items.reduce((sum, item) => sum + item.precio * item.cantidad, 0), [items])
   const whatsappLink = useMemo(() => buildWhatsAppOrderLink(items, total, comment), [items, total, comment])
 
+  // Adelanta la consulta a Supabase apenas el carrito alcanza el mínimo de
+  // la ruleta, en vez de esperar a que el cliente haga clic en "Confirmar
+  // pedido". Así, para cuando hace clic, la respuesta ya está lista (o casi)
+  // y el botón no se queda esperando la red.
+  const verificacionRuletaRef = useRef(null) // { deviceId, promise } en curso o ya resuelta
+  useEffect(() => {
+    if (!esElegibleParaRuleta(total)) {
+      verificacionRuletaRef.current = null
+      return
+    }
+    if (verificacionRuletaRef.current) return
+
+    const deviceId = obtenerDeviceId()
+    const promise = verificarSiYaJugo(deviceId).catch((err) => {
+      // Si falla la consulta, no se bloquea la venta: se trata igual que un
+      // dispositivo que no ha jugado.
+      console.error('No se pudo verificar si el dispositivo ya jugó la ruleta:', err)
+      return false
+    })
+    verificacionRuletaRef.current = { deviceId, promise }
+  }, [total])
+
   // Si el carrito no alcanza el mínimo, se salta la ruleta y va directo al
-  // formulario. Si lo alcanza, se consulta si el dispositivo ya jugó antes
-  // de decidir si abrir la ruleta o el formulario directamente.
+  // formulario. Si lo alcanza, se reutiliza la verificación adelantada de
+  // arriba (o se lanza una si no alcanzó a dispararse) para decidir si abrir
+  // la ruleta o ir directo al formulario.
   async function handleRealizarPedido() {
     if (!esElegibleParaRuleta(total)) {
       setShowEntregaForm(true)
       return
     }
 
-    setVerificandoRuleta(true)
-    let yaJugo
-    const deviceId = obtenerDeviceId()
-    try {
-      yaJugo = await verificarSiYaJugo(deviceId)
-    } catch (err) {
-      // Si falla la consulta, no se bloquea la venta: se trata igual que un
-      // dispositivo que no ha jugado.
-      console.error('No se pudo verificar si el dispositivo ya jugó la ruleta:', err)
-      yaJugo = false
+    if (!verificacionRuletaRef.current) {
+      const deviceId = obtenerDeviceId()
+      const promise = verificarSiYaJugo(deviceId).catch((err) => {
+        console.error('No se pudo verificar si el dispositivo ya jugó la ruleta:', err)
+        return false
+      })
+      verificacionRuletaRef.current = { deviceId, promise }
     }
+    const { deviceId, promise } = verificacionRuletaRef.current
+
+    setVerificandoRuleta(true)
+    const yaJugo = await promise
     setVerificandoRuleta(false)
 
     if (yaJugo) {
@@ -69,6 +93,10 @@ export default function Carrito({ onOpenProduct, onGoToInicio }) {
   }
 
   function handleRuletaCompletada() {
+    // El dispositivo pasó de "no ha jugado" a "ya jugó": la verificación
+    // adelantada quedó desactualizada, así que se descarta para que la
+    // próxima vez se vuelva a consultar (leerá el caché local al instante).
+    verificacionRuletaRef.current = null
     setRuletaDeviceId(null)
     setShowEntregaForm(true)
   }
@@ -153,7 +181,7 @@ export default function Carrito({ onOpenProduct, onGoToInicio }) {
               disabled={verificandoRuleta}
             >
               <IconWhatsapp />
-              {verificandoRuleta ? 'Verificando...' : 'Realizar pedido'}
+              {verificandoRuleta ? 'Verificando...' : 'Confirmar pedido'}
             </button>
           </>
         )}
