@@ -4,13 +4,19 @@
   width: 126px;
 }
 .rail-card {
+  display: block;
   width: 100%;
+  /* El contenedor (.rail-card-wrap) se estira al alto de la tarjeta más
+     alta del carrusel (nombres largos que se parten en dos líneas) — sin
+     esto, una tarjeta con nombre corto quedaba más baja que las demás. */
+  height: 100%;
   appearance: none;
   border: 1px solid var(--border);
   background: var(--navy-2);
   padding: 10px;
   text-align: left;
   cursor: pointer;
+  box-sizing: border-box;
 }
 .rail-card .cupwrap {
   width: 100%;

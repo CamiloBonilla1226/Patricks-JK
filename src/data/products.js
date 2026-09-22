@@ -52,7 +52,7 @@ export const PRODUCTS = [
   { id: 'mecato-chao', nombre: 'Chao', precio: 2500, categoria: 'Mecato', estado: 'disponible', imagen: '/productos/mecato-chao.png' },
   { id: 'mecato-de-toditos', nombre: 'De Toditos', precio: 5000, categoria: 'Mecato', estado: 'disponible', sabores: ['Mix', 'BBQ', 'Limón', 'Natural', 'Pollo'], imagen: '/productos/mecato-de-toditos.png' },
   { id: 'mecato-margarita-limon', nombre: 'Margarita Limón', precio: 5000, categoria: 'Mecato', estado: 'disponible', imagen: '/productos/mecato-margarita-limon.png' },
-  { id: 'mecato-margarita-natural', nombre: 'Margarita Natural', precio: 5000, categoria: 'Mecato', estado: 'disponible', imagen: '/productos/mecato-margarita-natural.png' },
+  { id: 'mecato-margarita-natural', nombre: 'Margarita Natural', precio: 5000, categoria: 'Mecato', estado: 'disponible', imagen: '/productos/mecato-margarita-natural.jpg' },
   { id: 'mecato-margarita-pollo', nombre: 'Margarita Pollo', precio: 5000, categoria: 'Mecato', estado: 'disponible', imagen: '/productos/mecato-margarita-pollo.png' },
   { id: 'mecato-onduladas-mayonesa', nombre: 'Onduladas Mayonesa', precio: 5000, categoria: 'Mecato', estado: 'disponible' },
   { id: 'mecato-onduladas-tomate', nombre: 'Onduladas Tomate', precio: 5000, categoria: 'Mecato', estado: 'disponible' },
