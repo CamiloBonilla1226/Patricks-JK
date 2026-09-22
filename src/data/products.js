@@ -21,16 +21,16 @@ export const PRODUCTS = [
   { id: 'cerveza-sixpack-heineken', nombre: 'Six Pack Heineken', precio: 30000, categoria: 'Cervezas', estado: 'disponible', imagen: '/productos/cerveza-sixpack-heineken.webp' },
 
   // Cervezas — unidad
-  { id: 'cerveza-poker', nombre: 'Poker', precio: 5000, categoria: 'Cervezas', estado: 'disponible' },
-  { id: 'cerveza-corona', nombre: 'Corona', precio: 8000, categoria: 'Cervezas', estado: 'disponible' },
-  { id: 'cerveza-coronita', nombre: 'Coronita', precio: 5000, categoria: 'Cervezas', estado: 'disponible' },
-  { id: 'cerveza-aguila-light', nombre: 'Águila Light', precio: 5000, categoria: 'Cervezas', estado: 'disponible' },
-  { id: 'cerveza-aguila-original', nombre: 'Águila Original', precio: 5000, categoria: 'Cervezas', estado: 'disponible' },
-  { id: 'cerveza-club-colombia-dorada', nombre: 'Club Colombia Dorada', precio: 5000, categoria: 'Cervezas', estado: 'disponible' },
-  { id: 'cerveza-costenita', nombre: 'Costeñita', precio: 4000, categoria: 'Cervezas', estado: 'disponible' },
-  { id: 'cerveza-heineken', nombre: 'Heineken', precio: 5000, categoria: 'Cervezas', estado: 'disponible' },
-  { id: 'cerveza-budweiser', nombre: 'Budweiser', precio: 5000, categoria: 'Cervezas', estado: 'disponible' },
-  { id: 'cerveza-tecate', nombre: 'Tecate', precio: 4000, categoria: 'Cervezas', estado: 'disponible' },
+  { id: 'cerveza-poker', nombre: 'Poker', precio: 5000, categoria: 'Cervezas', estado: 'disponible', imagen: '/productos/cerveza-poker.webp' },
+  { id: 'cerveza-corona', nombre: 'Corona', precio: 8000, categoria: 'Cervezas', estado: 'disponible', imagen: '/productos/cerveza-corona.webp' },
+  { id: 'cerveza-coronita', nombre: 'Coronita', precio: 5000, categoria: 'Cervezas', estado: 'disponible', imagen: '/productos/cerveza-coronita.webp' },
+  { id: 'cerveza-aguila-light', nombre: 'Águila Light', precio: 5000, categoria: 'Cervezas', estado: 'disponible', imagen: '/productos/cerveza-aguila-light.webp' },
+  { id: 'cerveza-aguila-original', nombre: 'Águila Original', precio: 5000, categoria: 'Cervezas', estado: 'disponible', imagen: '/productos/cerveza-aguila-original.webp' },
+  { id: 'cerveza-club-colombia-dorada', nombre: 'Club Colombia Dorada', precio: 5000, categoria: 'Cervezas', estado: 'disponible', imagen: '/productos/cerveza-club-colombia-dorada.webp' },
+  { id: 'cerveza-costenita', nombre: 'Costeñita', precio: 4000, categoria: 'Cervezas', estado: 'disponible', imagen: '/productos/cerveza-costenita.webp' },
+  { id: 'cerveza-heineken', nombre: 'Heineken', precio: 5000, categoria: 'Cervezas', estado: 'disponible', imagen: '/productos/cerveza-heineken.webp' },
+  { id: 'cerveza-budweiser', nombre: 'Budweiser', precio: 5000, categoria: 'Cervezas', estado: 'disponible', imagen: '/productos/cerveza-budweiser.webp' },
+  { id: 'cerveza-tecate', nombre: 'Tecate', precio: 4000, categoria: 'Cervezas', estado: 'disponible', imagen: '/productos/cerveza-tecate.webp' },
 
   // Aperitivos
   { id: 'aperitivo-cuates-rojo', nombre: 'Cuates Rojo', precio: 6000, categoria: 'Aperitivos', estado: 'disponible' },
