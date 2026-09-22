@@ -6,7 +6,7 @@ import RuletaModal from '../components/RuletaModal'
 import { useCart } from '../context/CartContext'
 import { useDisponibilidad } from '../context/DisponibilidadContext'
 import { resolveProductAvailability } from '../utils/availability'
-import { esElegibleParaRuleta } from '../utils/ruleta'
+import { esElegibleParaRuleta, elegirRuletaAleatoria } from '../utils/ruleta'
 import { PRODUCTS } from '../data/products'
 import { formatPrice } from '../utils/format'
 import { buildWhatsAppOrderLink } from '../utils/whatsapp'
@@ -34,7 +34,9 @@ export default function Carrito({ onOpenProduct, onGoToInicio }) {
   const [comment, setComment] = useState('')
   const [showEntregaForm, setShowEntregaForm] = useState(false)
   const [verificandoRuleta, setVerificandoRuleta] = useState(false)
-  const [ruletaDeviceId, setRuletaDeviceId] = useState(null)
+  // null cuando el modal está cerrado; al abrirlo se sortea cuál de las dos
+  // ruletas de 8 premios le toca (ver elegirRuletaAleatoria).
+  const [ruletaSesion, setRuletaSesion] = useState(null)
 
   const total = useMemo(() => items.reduce((sum, item) => sum + item.precio * item.cantidad, 0), [items])
   const whatsappLink = useMemo(
@@ -91,7 +93,7 @@ export default function Carrito({ onOpenProduct, onGoToInicio }) {
     if (yaJugo) {
       setShowEntregaForm(true)
     } else {
-      setRuletaDeviceId(deviceId)
+      setRuletaSesion({ deviceId, premios: elegirRuletaAleatoria() })
     }
   }
 
@@ -100,7 +102,7 @@ export default function Carrito({ onOpenProduct, onGoToInicio }) {
     // adelantada quedó desactualizada, así que se descarta para que la
     // próxima vez se vuelva a consultar (leerá el caché local al instante).
     verificacionRuletaRef.current = null
-    setRuletaDeviceId(null)
+    setRuletaSesion(null)
     setShowEntregaForm(true)
   }
 
@@ -199,10 +201,11 @@ export default function Carrito({ onOpenProduct, onGoToInicio }) {
         )}
       </div>
 
-      {ruletaDeviceId && (
+      {ruletaSesion && (
         <RuletaModal
-          deviceId={ruletaDeviceId}
-          onClose={() => setRuletaDeviceId(null)}
+          deviceId={ruletaSesion.deviceId}
+          premios={ruletaSesion.premios}
+          onClose={() => setRuletaSesion(null)}
           onCompleted={handleRuletaCompletada}
         />
       )}

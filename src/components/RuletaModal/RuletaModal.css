@@ -1,5 +1,5 @@
 /* Ventana grande a pantalla completa (no un cuadro pequeño centrado): así la
-   rueda tiene mucho más espacio y los 16 textos se pueden leer. */
+   rueda tiene mucho más espacio y los 8 textos se pueden leer. */
 .ruleta-sheet {
   position: fixed;
   inset: 0;
@@ -83,28 +83,30 @@
 }
 
 /* Ancho y separación en % (no px fijos) para que el tamaño del texto siga
-   creciendo o encogiendo junto con el diámetro real de la rueda. */
+   creciendo o encogiendo junto con el diámetro real de la rueda. Con solo 8
+   segmentos (antes 16) cada uno abarca el doble de ángulo, así que el
+   recuadro de texto y la letra pueden ser bastante más grandes. */
 .ruleta-label {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 30%;
-  margin-left: -15%;
+  width: 42%;
+  margin-left: -21%;
   height: 50%;
   transform-origin: 50% 0%;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding-bottom: 5%;
+  padding-bottom: 8%;
   pointer-events: none;
 }
 .ruleta-label span {
   display: block;
   text-align: center;
   font-family: 'Work Sans', sans-serif;
-  font-size: clamp(9px, 2.6vw, 12px);
+  font-size: clamp(13px, 3.6vw, 18px);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.25;
   letter-spacing: 0.1px;
 }
 

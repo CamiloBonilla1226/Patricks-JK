@@ -1,3 +1,5 @@
+import { PREMIOS_RULETA_A, PREMIOS_RULETA_B } from '../data/premiosRuleta'
+
 // Monto mínimo de subtotal para que el cliente sea elegible a girar la
 // ruleta de descuentos. Se usa tanto en el carrito (para decidir si se
 // consulta si el dispositivo ya jugó) como en el banner de Inicio.
@@ -6,6 +8,15 @@ export const RULETA_MIN_SUBTOTAL = 70000
 /** Un carrito es elegible a la ruleta si su subtotal alcanza el mínimo. */
 export function esElegibleParaRuleta(subtotal) {
   return subtotal >= RULETA_MIN_SUBTOTAL
+}
+
+/**
+ * Sortea 50/50 cuál de las dos ruletas de 8 premios le toca al cliente.
+ * Se llama una vez cada vez que se abre el modal de la ruleta (no antes),
+ * para que la elección cambie de una partida a otra.
+ */
+export function elegirRuletaAleatoria() {
+  return Math.random() < 0.5 ? PREMIOS_RULETA_A : PREMIOS_RULETA_B
 }
 
 // Texto exacto (ver src/data/premiosRuleta.js) que hace que un giro no
