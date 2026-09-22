@@ -11,6 +11,23 @@ const FOCUSABLE_SELECTOR =
 const EXTRA_SPINS = 5 // vueltas completas antes de frenar en el premio elegido
 const SPIN_DURATION_MS = 4000
 
+// Si el azar cae en un premio "raro" (ver premiosRuleta.js — hoy son
+// $30.000 y 1 Six), solo se mantiene esta fracción de las veces; el resto
+// se vuelve a sortear entre las casillas no-raras. Esto se decide ANTES de
+// empezar a girar, así la rueda siempre se detiene exactamente en el premio
+// que se anuncia (nunca gira hacia un premio y muestra otro).
+const PROBABILIDAD_MANTENER_RARO = 0.2
+
+/** Elige a qué casilla debe ir la rueda, aplicando el filtro de "raro". */
+function elegirIndiceObjetivo(premios) {
+  const indice = Math.floor(Math.random() * premios.length)
+  if (!premios[indice].raro || Math.random() < PROBABILIDAD_MANTENER_RARO) {
+    return indice
+  }
+  const indicesNoRaros = premios.map((_, i) => i).filter((i) => !premios[i].raro)
+  return indicesNoRaros[Math.floor(Math.random() * indicesNoRaros.length)]
+}
+
 // Colores del segmento alternando 3 tonos claros de la paleta (nada de
 // --navy-2: sobre el fondo negro del modal se confundía con el backdrop y
 // esos segmentos parecían "huecos" negros). Los tres son lo bastante claros
@@ -75,6 +92,13 @@ export default function RuletaModal({ deviceId, premios, onClose, onCompleted })
   const closeBtnRef = useRef(null)
   const wheelRef = useRef(null)
   const targetIndexRef = useRef(null)
+  // Se lee dentro del listener de teclado de abajo sin tener que añadir
+  // `fase` a las dependencias de ese efecto (que si no, se reiniciaría —
+  // y le robaría el foco de vuelta al botón ✕ — en cada cambio de fase).
+  const faseRef = useRef(fase)
+  useEffect(() => {
+    faseRef.current = fase
+  }, [fase])
 
   const segmentDeg = 360 / premios.length
   const wheelBackground = useMemo(
@@ -95,7 +119,10 @@ export default function RuletaModal({ deviceId, premios, onClose, onCompleted })
 
     function onKeyDown(e) {
       if (e.key === 'Escape') {
-        onClose()
+        // Mientras gira, no se deja cerrar (ver el botón ✕ más abajo, tiene
+        // el mismo bloqueo): si se cierra a mitad de la animación, el giro
+        // nunca termina de resolverse y el premio se pierde sin registrarse.
+        if (faseRef.current !== 'girando') onClose()
         return
       }
       if (e.key !== 'Tab' || !sheetRef.current) return
@@ -127,7 +154,7 @@ export default function RuletaModal({ deviceId, premios, onClose, onCompleted })
 
   function handleGirar() {
     if (fase === 'girando') return
-    const targetIndex = Math.floor(Math.random() * premios.length)
+    const targetIndex = elegirIndiceObjetivo(premios)
     targetIndexRef.current = targetIndex
     setResultado(null)
     setFase('girando')
@@ -190,7 +217,13 @@ export default function RuletaModal({ deviceId, premios, onClose, onCompleted })
       >
         <div className="ruleta-top">
           <h3 id="ruletaTitle">¡Gira la ruleta!</h3>
-          <button ref={closeBtnRef} className="ruleta-close" onClick={onClose} aria-label="Cerrar">
+          <button
+            ref={closeBtnRef}
+            className="ruleta-close"
+            onClick={onClose}
+            disabled={fase === 'girando'}
+            aria-label="Cerrar"
+          >
             ✕
           </button>
         </div>
@@ -235,6 +268,7 @@ export default function RuletaModal({ deviceId, premios, onClose, onCompleted })
                 )
               })}
             </div>
+            <div className="ruleta-hub" aria-hidden="true"></div>
           </div>
 
           <div className="ruleta-result-area">

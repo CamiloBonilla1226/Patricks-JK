@@ -37,6 +37,11 @@
   appearance: none;
   cursor: pointer;
 }
+.ruleta-close:disabled {
+  cursor: not-allowed;
+  color: var(--cream-dim);
+  border-color: var(--border);
+}
 
 /* Ocupa todo el espacio entre el encabezado y los botones de abajo, y
    centra la rueda + el resultado en ese espacio (que sobra al no ser ya un
@@ -58,43 +63,80 @@
   aspect-ratio: 1;
   flex: none;
   margin: 12px auto;
+  /* Sombra apoyada en el suelo, no en la rueda: si fuera parte de
+     .ruleta-wheel giraría con ella. Puesta en el envoltorio (que no rota),
+     se queda quieta y le da profundidad a todo el conjunto. */
+  filter: drop-shadow(0 16px 26px color-mix(in srgb, var(--navy) 70%, transparent));
+}
+/* Halo suave detrás de la rueda — un acento de marca, no un color nuevo
+   (mismo --amber de siempre, solo diluido con transparencia). */
+.ruleta-wheel-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -7%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--amber) 22%, transparent), transparent 72%);
+  z-index: 0;
 }
 
 .ruleta-pointer {
   position: absolute;
-  top: -8px;
+  top: -4px;
   left: 50%;
+  width: 24px;
+  height: 30px;
   transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 14px solid transparent;
-  border-right: 14px solid transparent;
-  border-top: 22px solid var(--amber-soft);
-  z-index: 2;
+  background: linear-gradient(180deg, var(--amber-soft), var(--amber));
+  clip-path: polygon(50% 100%, 4% 34%, 22% 0%, 78% 0%, 96% 34%);
+  filter: drop-shadow(0 3px 5px color-mix(in srgb, var(--navy) 60%, transparent));
+  z-index: 3;
 }
 
 .ruleta-wheel {
   position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
   border-radius: 50%;
   border: 4px solid var(--border-strong);
+  /* Doble anillo (uno pegado al borde, otro un poco más afuera) en vez de
+     un solo trazo plano — el bisel le da un aire más pulido a la rueda. */
+  box-shadow:
+    0 0 0 2px var(--navy-2),
+    0 0 0 5px color-mix(in srgb, var(--amber) 35%, transparent);
   will-change: transform;
+}
+
+/* Tapa central fija (no rota con la rueda) que cubre el punto donde
+   convergen los 12 rótulos — un detalle clásico de ruleta física, y evita
+   que se vea el vértice de todas las etiquetas amontonado en el medio. */
+.ruleta-hub {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 15%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--amber-soft), var(--amber));
+  border: 2px solid var(--navy-2);
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--navy) 55%, transparent);
+  z-index: 2;
 }
 
 /* Ancho y separación en % (no px fijos) para que el tamaño del texto siga
    creciendo o encogiendo junto con el diámetro real de la rueda. Cada
-   segmento es una porción angular de 45° (con 8 premios) que se va
+   segmento es una porción angular de 30° (con 12 premios) que se va
    ANGOSTANDO hacia el centro — un recuadro de texto rectangular más ancho
-   que eso invade el segmento vecino. 34% de ancho, anclado bien cerca del
+   que eso invade el segmento vecino. 24% de ancho, anclado bien cerca del
    borde exterior (donde el segmento es más ancho), es lo que cabe sin
-   pasarse para 8 segmentos. */
+   pasarse para 12 segmentos. */
 .ruleta-label {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 34%;
-  margin-left: -17%;
+  width: 24%;
+  margin-left: -12%;
   height: 50%;
   transform-origin: 50% 0%;
   display: flex;
@@ -107,9 +149,9 @@
   display: block;
   text-align: center;
   font-family: 'Work Sans', sans-serif;
-  font-size: clamp(10px, 2.8vw, 13px);
+  font-size: clamp(9px, 2.4vw, 11px);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.15;
   letter-spacing: 0.1px;
 }
 
@@ -146,12 +188,19 @@
   font-weight: 700;
   letter-spacing: 0.2px;
   color: var(--ink-on-accent);
-  background: var(--amber);
+  background: linear-gradient(180deg, var(--amber-soft), var(--amber));
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--amber) 35%, transparent);
   padding: 14px 10px;
+  transition: box-shadow 150ms ease, transform 150ms ease;
+}
+.ruleta-btn:active:not(:disabled) {
+  transform: scale(0.98);
+  box-shadow: 0 3px 10px color-mix(in srgb, var(--amber) 30%, transparent);
 }
 .ruleta-btn:disabled {
   cursor: not-allowed;
   color: var(--cream-dim);
   background: var(--navy);
+  box-shadow: none;
   border: 1px solid var(--border-strong);
 }
