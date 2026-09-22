@@ -35,3 +35,26 @@ export function extraerPorcentaje(texto) {
   const match = texto.match(/(\d+(?:\.\d+)?)\s*%/)
   return match ? Number(match[1]) : 0
 }
+
+/**
+ * Arma el código corto que identifica el premio ganado, para mostrarlo en
+ * el mensaje de WhatsApp en vez del texto legible del premio — así, aunque
+ * el cliente edite el mensaje antes de enviarlo, no puede hacerse pasar por
+ * otro premio sin adivinar un código que además coincida con el día de hoy
+ * (quien atiende lo revisa contra una tabla física, fuera de la app).
+ *
+ * Formato: DD-PJK{codigo}-MM-XX
+ *   DD = día de hoy (2 dígitos), MM = mes de hoy (2 dígitos),
+ *   XX = 2 dígitos aleatorios, generados una sola vez en el momento del
+ *   giro y fijos de ahí en adelante (no se recalculan al armar el mensaje).
+ *
+ * `codigo` es null para "Perdiste" y "Sigue intentando" (no son premios que
+ * deban codificarse) — en ese caso esta función también devuelve null.
+ */
+export function generarCodigoPremio(codigo, fecha = new Date()) {
+  if (!codigo) return null
+  const dd = String(fecha.getDate()).padStart(2, '0')
+  const mm = String(fecha.getMonth() + 1).padStart(2, '0')
+  const xx = String(Math.floor(Math.random() * 100)).padStart(2, '0')
+  return `${dd}-PJK${codigo}-${mm}-${xx}`
+}

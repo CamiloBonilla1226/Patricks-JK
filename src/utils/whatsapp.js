@@ -16,9 +16,15 @@ export function buildWhatsAppContactLink() {
  * devuelve el link de WhatsApp con ese texto precargado — el cliente solo
  * tiene que revisarlo y darle enviar, nunca se manda nada sin que él lo vea.
  *
- * @param {{texto: string}|null} [premio] - Premio ganado en la ruleta, si
- * aplica. Solo se muestra en el mensaje; el total del pedido no cambia (el
- * negocio aplica el descuento manualmente al confirmar por WhatsApp).
+ * @param {{codigoGenerado: string|null}|null} [premio] - Premio ganado en la
+ * ruleta, si aplica. El mensaje NUNCA muestra el texto legible del premio
+ * (ej. "5% en el total de la cuenta") — solo su código corto
+ * (`codigoGenerado`, ver generarCodigoPremio en utils/ruleta.js). Esto es
+ * deliberado: el cliente puede editar este mensaje libremente en su
+ * teléfono antes de enviarlo, así que el texto del premio nunca debe viajar
+ * ahí en claro, o podría cambiarlo por otro premio antes de enviarlo. El
+ * total del pedido tampoco cambia aquí (el negocio aplica el descuento
+ * manualmente al confirmar, revisando el código contra una tabla física).
  */
 export function buildWhatsAppOrderLink(items, total, comment, premio) {
   const lines = ["🥃 *Nuevo pedido — Patrick's JK*", '']
@@ -33,9 +39,9 @@ export function buildWhatsAppOrderLink(items, total, comment, premio) {
 
   lines.push(`*Total: ${formatPrice(total)}*`)
 
-  if (premio && premio.texto !== 'Perdiste') {
+  if (premio?.codigoGenerado) {
     lines.push('')
-    lines.push(`🎉 *Premio de la ruleta:* ${premio.texto}`)
+    lines.push(`🎡 Premio de la ruleta: ${premio.codigoGenerado}`)
   }
 
   const trimmedComment = comment.trim()

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useCart } from '../../context/CartContext'
 import { registrarGiro } from '../../lib/ruleta'
-import { SIGUE_INTENTANDO, extraerPorcentaje } from '../../utils/ruleta'
+import { SIGUE_INTENTANDO, extraerPorcentaje, generarCodigoPremio } from '../../utils/ruleta'
 import './RuletaModal.css'
 
 const FOCUSABLE_SELECTOR =
@@ -19,11 +19,12 @@ const SEGMENT_COLORS = ['var(--cream-dim)', 'var(--amber)', 'var(--teal)']
 const SEGMENT_TEXT_COLOR = 'var(--ink-on-accent)'
 
 // Textos cortos SOLO para el rótulo que se ve encima de cada segmento de la
-// rueda — el resultado que se muestra debajo al terminar de girar, lo que
-// se guarda en Supabase (registrarGiro) y lo que se usa en el mensaje de
-// WhatsApp siguen usando el texto completo y exacto de premiosRuleta.js.
-// Esto es solo para que el texto entre en el espacio del segmento sin
-// invadir el de al lado.
+// rueda — el resultado que se muestra debajo al terminar de girar y lo que
+// se guarda en Supabase (registrarGiro) siguen usando el texto completo y
+// exacto de premiosRuleta.js. Esto es solo para que el texto entre en el
+// espacio del segmento sin invadir el de al lado. (El mensaje de WhatsApp no
+// usa ninguna de las dos versiones del texto — usa el código corto, ver
+// generarCodigoPremio en utils/ruleta.js.)
 const TEXTO_CORTO_RUEDA = {
   'Ganaste 1 Poker': '1 Poker',
   'Ganaste $30.000': '$30.000',
@@ -155,7 +156,15 @@ export default function RuletaModal({ deviceId, premios, onClose, onCompleted })
     }
 
     setFase('resultado')
-    setPremio({ texto: premio.texto, porcentaje: extraerPorcentaje(premio.texto) })
+    // El código para el mensaje de WhatsApp se genera AQUÍ, apenas se sabe
+    // el resultado (no después, al armar el mensaje) — así la fecha
+    // codificada es la del momento real del giro, sin importar cuánto se
+    // demore el cliente en confirmar el pedido.
+    setPremio({
+      texto: premio.texto,
+      porcentaje: extraerPorcentaje(premio.texto),
+      codigoGenerado: generarCodigoPremio(premio.codigo),
+    })
     registrarSiCorresponde(premio.texto)
   }
 
