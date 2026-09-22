@@ -64,12 +64,12 @@ export const PRODUCTS = [
   { id: 'mecato-chochitos-pequenos', nombre: 'Chochitos Pequeños', precio: 3000, categoria: 'Mecato', estado: 'disponible', imagen: '/productos/mecato-chochitos-pequenos.webp' },
 
   // Bebidas
-  { id: 'bebida-electrolit', nombre: 'Electrolit', precio: 12000, categoria: 'Bebidas', estado: 'disponible', sabores: ['Uva', 'Fresa Kiwi', 'Jamaica', 'Maracuyá'] },
-  { id: 'bebida-gatorade', nombre: 'Gatorade', precio: 6000, categoria: 'Bebidas', estado: 'disponible', sabores: ['Rojo', 'Azul', 'Naranja'] },
-  { id: 'bebida-soda-grande', nombre: 'Soda Grande', precio: 7000, categoria: 'Bebidas', estado: 'disponible' },
-  { id: 'bebida-soda-pequena', nombre: 'Soda Pequeña', precio: 5000, categoria: 'Bebidas', estado: 'disponible' },
-  { id: 'bebida-agua', nombre: 'Agua', precio: 2500, categoria: 'Bebidas', estado: 'disponible' },
-  { id: 'bebida-vive100', nombre: 'Vive 100', precio: 5000, categoria: 'Bebidas', estado: 'disponible', sabores: ['Original', 'Sandía'] },
+  { id: 'bebida-electrolit', nombre: 'Electrolit', precio: 12000, categoria: 'Bebidas', estado: 'disponible', sabores: ['Uva', 'Fresa Kiwi', 'Jamaica', 'Maracuyá'], imagen: '/productos/bebida-electrolit.webp' },
+  { id: 'bebida-gatorade', nombre: 'Gatorade', precio: 6000, categoria: 'Bebidas', estado: 'disponible', sabores: ['Rojo', 'Azul', 'Naranja'], imagen: '/productos/bebida-gatorade.webp' },
+  { id: 'bebida-soda-grande', nombre: 'Soda Grande', precio: 7000, categoria: 'Bebidas', estado: 'disponible', imagen: '/productos/bebida-soda-grande.webp' },
+  { id: 'bebida-soda-pequena', nombre: 'Soda Pequeña', precio: 5000, categoria: 'Bebidas', estado: 'disponible', imagen: '/productos/bebida-soda-pequena.webp' },
+  { id: 'bebida-agua', nombre: 'Agua', precio: 2500, categoria: 'Bebidas', estado: 'disponible', imagen: '/productos/bebida-agua.webp' },
+  { id: 'bebida-vive100', nombre: 'Vive 100', precio: 5000, categoria: 'Bebidas', estado: 'disponible', sabores: ['Original', 'Sandía'], imagen: '/productos/bebida-vive100.webp' },
 
   // Alcohol
   { id: 'alcohol-jose-cuervo', nombre: 'José Cuervo', precio: 90000, categoria: 'Alcohol', estado: 'disponible', imagen: '/productos/alcohol-jose-cuervo.webp' },
