@@ -73,7 +73,7 @@ function App() {
 
   return (
     <div className="app">
-      <TopBar />
+      <TopBar showLogo={activeTab === 'menu' || activeTab === 'carrito'} />
 
       <main {...contentSwipeHandlers}>
         <div
