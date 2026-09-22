@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { IconCheck } from '../Icons'
 import { obtenerDeviceId } from '../../lib/deviceId'
 import { crearPedido } from '../../lib/ruleta'
@@ -111,7 +112,12 @@ export default function EntregaForm({ subtotal, whatsappLink, onClose, onFinish 
     setStep('success')
   }
 
-  return (
+  // Portal a document.body: el carrito vive dentro de un contenedor que
+  // queda con `transform` puesto por la animación de cambio de pantalla
+  // (screen-transition, ver App.css), y eso rompe `position: fixed` — sin
+  // el portal, el overlay no cubriría toda la pantalla (el TopBar quedaría
+  // por encima y se llevaría los clics del backdrop).
+  return createPortal(
     <div className="overlay">
       <div className="backdrop" onClick={handleDismiss}></div>
       <div
@@ -202,6 +208,7 @@ export default function EntregaForm({ subtotal, whatsappLink, onClose, onFinish 
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   )
 }

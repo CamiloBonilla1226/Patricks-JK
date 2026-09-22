@@ -2,7 +2,7 @@ import { createContext, useContext, useMemo, useReducer } from 'react'
 
 const CartContext = createContext(null)
 
-const initialState = { items: [] }
+const initialState = { items: [], premio: null }
 
 function cartReducer(state, action) {
   switch (action.type) {
@@ -44,7 +44,12 @@ function cartReducer(state, action) {
       }
     }
     case 'CLEAR_CART':
-      return { ...state, items: [] }
+      return { ...state, items: [], premio: null }
+    // Premio ganado en la ruleta — se guarda aquí para que la Parte 3 lo use
+    // al calcular el descuento del carrito. Esta parte de la tarea solo lo
+    // guarda y lo muestra, no lo aplica a ningún cálculo todavía.
+    case 'SET_PREMIO':
+      return { ...state, premio: action.premio }
     default:
       return state
   }
@@ -60,12 +65,14 @@ export function CartProvider({ children }) {
       items: state.items,
       count,
       total,
+      premio: state.premio,
       addItem: (item) => dispatch({ type: 'ADD_ITEM', item }),
       removeItem: (id) => dispatch({ type: 'REMOVE_ITEM', id }),
       decrementItem: (id) => dispatch({ type: 'DECREMENT_ITEM', id }),
       clearCart: () => dispatch({ type: 'CLEAR_CART' }),
+      setPremio: (premio) => dispatch({ type: 'SET_PREMIO', premio }),
     }
-  }, [state.items])
+  }, [state.items, state.premio])
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }

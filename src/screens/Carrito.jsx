@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { IconCart, IconTrash, IconWhatsapp } from '../components/Icons'
 import FeaturedCarousel from '../components/FeaturedCarousel'
 import EntregaForm from '../components/EntregaForm'
+import RuletaModal from '../components/RuletaModal'
 import { useCart } from '../context/CartContext'
 import { useDisponibilidad } from '../context/DisponibilidadContext'
 import { resolveProductAvailability } from '../utils/availability'
@@ -33,6 +34,7 @@ export default function Carrito({ onOpenProduct, onGoToInicio }) {
   const [comment, setComment] = useState('')
   const [showEntregaForm, setShowEntregaForm] = useState(false)
   const [verificandoRuleta, setVerificandoRuleta] = useState(false)
+  const [ruletaDeviceId, setRuletaDeviceId] = useState(null)
 
   const total = useMemo(() => items.reduce((sum, item) => sum + item.precio * item.cantidad, 0), [items])
   const whatsappLink = useMemo(() => buildWhatsAppOrderLink(items, total, comment), [items, total, comment])
@@ -48,8 +50,8 @@ export default function Carrito({ onOpenProduct, onGoToInicio }) {
 
     setVerificandoRuleta(true)
     let yaJugo
+    const deviceId = obtenerDeviceId()
     try {
-      const deviceId = obtenerDeviceId()
       yaJugo = await verificarSiYaJugo(deviceId)
     } catch (err) {
       // Si falla la consulta, no se bloquea la venta: se trata igual que un
@@ -62,9 +64,13 @@ export default function Carrito({ onOpenProduct, onGoToInicio }) {
     if (yaJugo) {
       setShowEntregaForm(true)
     } else {
-      // TODO: abrir la ruleta aquí cuando exista su interfaz (tarea aparte).
-      console.log('Aquí se debe abrir la ruleta')
+      setRuletaDeviceId(deviceId)
     }
+  }
+
+  function handleRuletaCompletada() {
+    setRuletaDeviceId(null)
+    setShowEntregaForm(true)
   }
 
   function handlePedidoFinalizado() {
@@ -161,6 +167,14 @@ export default function Carrito({ onOpenProduct, onGoToInicio }) {
           </>
         )}
       </div>
+
+      {ruletaDeviceId && (
+        <RuletaModal
+          deviceId={ruletaDeviceId}
+          onClose={() => setRuletaDeviceId(null)}
+          onCompleted={handleRuletaCompletada}
+        />
+      )}
 
       {showEntregaForm && (
         <EntregaForm
