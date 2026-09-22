@@ -33,17 +33,17 @@ export const PRODUCTS = [
   { id: 'cerveza-tecate', nombre: 'Tecate', precio: 4000, categoria: 'Cervezas', estado: 'disponible', imagen: '/productos/cerveza-tecate.webp' },
 
   // Aperitivos
-  { id: 'aperitivo-cuates-rojo', nombre: 'Cuates Rojo', precio: 6000, categoria: 'Aperitivos', estado: 'disponible' },
-  { id: 'aperitivo-cuates-amarillo', nombre: 'Cuates Amarillo', precio: 6000, categoria: 'Aperitivos', estado: 'disponible' },
-  { id: 'aperitivo-cuates-verde', nombre: 'Cuates Verde', precio: 6000, categoria: 'Aperitivos', estado: 'disponible' },
-  { id: 'aperitivo-smirnoff-manzana-verde', nombre: 'Smirnoff Manzana Verde', precio: 10000, categoria: 'Aperitivos', estado: 'disponible' },
-  { id: 'aperitivo-smirnoff-original', nombre: 'Smirnoff Original', precio: 10000, categoria: 'Aperitivos', estado: 'disponible' },
-  { id: 'aperitivo-redds-rose', nombre: "Redd's Rose", precio: 5000, categoria: 'Aperitivos', estado: 'disponible' },
-  { id: 'aperitivo-redds-verde', nombre: "Redd's Verde", precio: 5000, categoria: 'Aperitivos', estado: 'disponible' },
-  { id: 'aperitivo-like-blueberry', nombre: 'Like Blueberry', precio: 5000, categoria: 'Aperitivos', estado: 'disponible' },
-  { id: 'aperitivo-like-citrus', nombre: 'Like Citrus', precio: 5000, categoria: 'Aperitivos', estado: 'disponible' },
-  { id: 'aperitivo-like-mango', nombre: 'Like Mango', precio: 5000, categoria: 'Aperitivos', estado: 'disponible' },
-  { id: 'aperitivo-like-fresh-apple', nombre: 'Like Fresh Apple', precio: 5000, categoria: 'Aperitivos', estado: 'disponible' },
+  { id: 'aperitivo-cuates-rojo', nombre: 'Cuates Rojo', precio: 6000, categoria: 'Aperitivos', estado: 'disponible', imagen: '/productos/aperitivo-cuates-rojo.webp' },
+  { id: 'aperitivo-cuates-amarillo', nombre: 'Cuates Amarillo', precio: 6000, categoria: 'Aperitivos', estado: 'disponible', imagen: '/productos/aperitivo-cuates-amarillo.webp' },
+  { id: 'aperitivo-cuates-verde', nombre: 'Cuates Verde', precio: 6000, categoria: 'Aperitivos', estado: 'disponible', imagen: '/productos/aperitivo-cuates-verde.webp' },
+  { id: 'aperitivo-smirnoff-manzana-verde', nombre: 'Smirnoff Manzana Verde', precio: 10000, categoria: 'Aperitivos', estado: 'disponible', imagen: '/productos/aperitivo-smirnoff-manzana-verde.webp' },
+  { id: 'aperitivo-smirnoff-original', nombre: 'Smirnoff Original', precio: 10000, categoria: 'Aperitivos', estado: 'disponible', imagen: '/productos/aperitivo-smirnoff-original.webp' },
+  { id: 'aperitivo-redds-rose', nombre: "Redd's Rose", precio: 5000, categoria: 'Aperitivos', estado: 'disponible', imagen: '/productos/aperitivo-redds-rose.webp' },
+  { id: 'aperitivo-redds-verde', nombre: "Redd's Verde", precio: 5000, categoria: 'Aperitivos', estado: 'disponible', imagen: '/productos/aperitivo-redds-verde.webp' },
+  { id: 'aperitivo-like-blueberry', nombre: 'Like Blueberry', precio: 5000, categoria: 'Aperitivos', estado: 'disponible', imagen: '/productos/aperitivo-like-blueberry.webp' },
+  { id: 'aperitivo-like-citrus', nombre: 'Like Citrus', precio: 5000, categoria: 'Aperitivos', estado: 'disponible', imagen: '/productos/aperitivo-like-citrus.webp' },
+  { id: 'aperitivo-like-mango', nombre: 'Like Mango', precio: 5000, categoria: 'Aperitivos', estado: 'disponible', imagen: '/productos/aperitivo-like-mango.webp' },
+  { id: 'aperitivo-like-fresh-apple', nombre: 'Like Fresh Apple', precio: 5000, categoria: 'Aperitivos', estado: 'disponible', imagen: '/productos/aperitivo-like-fresh-apple.webp' },
 
   // Mecato
   { id: 'mecato-bombones', nombre: 'Bombones', precio: 1000, categoria: 'Mecato', estado: 'disponible', imagen: '/productos/mecato-bombones.png' },
