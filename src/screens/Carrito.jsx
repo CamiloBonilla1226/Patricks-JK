@@ -5,9 +5,12 @@ import EntregaForm from '../components/EntregaForm'
 import { useCart } from '../context/CartContext'
 import { useDisponibilidad } from '../context/DisponibilidadContext'
 import { resolveProductAvailability } from '../utils/availability'
+import { esElegibleParaRuleta } from '../utils/ruleta'
 import { PRODUCTS } from '../data/products'
 import { formatPrice } from '../utils/format'
 import { buildWhatsAppOrderLink } from '../utils/whatsapp'
+import { obtenerDeviceId } from '../lib/deviceId'
+import { verificarSiYaJugo } from '../lib/ruleta'
 
 const COMMENT_MAX_LENGTH = 300
 const SUGGESTIONS_MAX_PRICE = 20000
@@ -29,9 +32,40 @@ export default function Carrito({ onOpenProduct, onGoToInicio }) {
   const { isAvailable } = useDisponibilidad()
   const [comment, setComment] = useState('')
   const [showEntregaForm, setShowEntregaForm] = useState(false)
+  const [verificandoRuleta, setVerificandoRuleta] = useState(false)
 
   const total = useMemo(() => items.reduce((sum, item) => sum + item.precio * item.cantidad, 0), [items])
   const whatsappLink = useMemo(() => buildWhatsAppOrderLink(items, total, comment), [items, total, comment])
+
+  // Si el carrito no alcanza el mínimo, se salta la ruleta y va directo al
+  // formulario. Si lo alcanza, se consulta si el dispositivo ya jugó antes
+  // de decidir si abrir la ruleta o el formulario directamente.
+  async function handleRealizarPedido() {
+    if (!esElegibleParaRuleta(total)) {
+      setShowEntregaForm(true)
+      return
+    }
+
+    setVerificandoRuleta(true)
+    let yaJugo
+    try {
+      const deviceId = obtenerDeviceId()
+      yaJugo = await verificarSiYaJugo(deviceId)
+    } catch (err) {
+      // Si falla la consulta, no se bloquea la venta: se trata igual que un
+      // dispositivo que no ha jugado.
+      console.error('No se pudo verificar si el dispositivo ya jugó la ruleta:', err)
+      yaJugo = false
+    }
+    setVerificandoRuleta(false)
+
+    if (yaJugo) {
+      setShowEntregaForm(true)
+    } else {
+      // TODO: abrir la ruleta aquí cuando exista su interfaz (tarea aparte).
+      console.log('Aquí se debe abrir la ruleta')
+    }
+  }
 
   function handlePedidoFinalizado() {
     setShowEntregaForm(false)
@@ -109,10 +143,11 @@ export default function Carrito({ onOpenProduct, onGoToInicio }) {
             <button
               type="button"
               className="whatsapp-send-btn"
-              onClick={() => setShowEntregaForm(true)}
+              onClick={handleRealizarPedido}
+              disabled={verificandoRuleta}
             >
               <IconWhatsapp />
-              Realizar pedido
+              {verificandoRuleta ? 'Verificando...' : 'Realizar pedido'}
             </button>
           </>
         )}

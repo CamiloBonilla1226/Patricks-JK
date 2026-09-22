@@ -510,6 +510,11 @@ main {
   background: var(--amber);
   padding: 14px 10px;
 }
+.whatsapp-send-btn:disabled {
+  cursor: not-allowed;
+  color: var(--cream-dim);
+  background: var(--navy-2);
+}
 .whatsapp-send-btn .ico {
   width: 18px;
   height: 18px;
