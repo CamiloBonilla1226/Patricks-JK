@@ -135,9 +135,13 @@ export default function RuletaModal({ deviceId, onClose, onCompleted }) {
   // queda con `transform` puesto por la animación de cambio de pantalla
   // (screen-transition, ver App.css), y eso rompe `position: fixed` — sin
   // el portal, el overlay no cubriría toda la pantalla.
+  //
+  // Esta ventana ocupa toda la pantalla (ver RuletaModal.css), así que no
+  // hay un "afuera" del diálogo donde hacer clic para cerrar — el cierre
+  // queda cubierto con Escape y el botón ✕ visible, los otros dos métodos
+  // exigidos para modales.
   return createPortal(
     <div className="overlay">
-      <div className="backdrop" onClick={onClose}></div>
       <div
         className="ruleta-sheet"
         ref={sheetRef}
@@ -152,42 +156,44 @@ export default function RuletaModal({ deviceId, onClose, onCompleted }) {
           </button>
         </div>
 
-        <div className="ruleta-wheel-wrap">
-          <div className="ruleta-pointer" aria-hidden="true"></div>
-          <div
-            className="ruleta-wheel"
-            ref={wheelRef}
-            style={{
-              background: wheelBackground,
-              transform: `rotate(${rotacion}deg)`,
-              transition: `transform ${SPIN_DURATION_MS}ms cubic-bezier(0.12, 0.67, 0.16, 1)`,
-            }}
-            onTransitionEnd={handleTransitionEnd}
-          >
-            {PREMIOS_RULETA.map((premio, i) => (
-              <div
-                key={premio.id}
-                className="ruleta-label"
-                style={{
-                  transform: `rotate(${i * SEGMENT_DEG + SEGMENT_DEG / 2}deg)`,
-                  color: SEGMENT_TEXT_COLOR,
-                }}
-              >
-                <span>{premio.texto}</span>
-              </div>
-            ))}
+        <div className="ruleta-body">
+          <div className="ruleta-wheel-wrap">
+            <div className="ruleta-pointer" aria-hidden="true"></div>
+            <div
+              className="ruleta-wheel"
+              ref={wheelRef}
+              style={{
+                background: wheelBackground,
+                transform: `rotate(${rotacion}deg)`,
+                transition: `transform ${SPIN_DURATION_MS}ms cubic-bezier(0.12, 0.67, 0.16, 1)`,
+              }}
+              onTransitionEnd={handleTransitionEnd}
+            >
+              {PREMIOS_RULETA.map((premio, i) => (
+                <div
+                  key={premio.id}
+                  className="ruleta-label"
+                  style={{
+                    transform: `rotate(${i * SEGMENT_DEG + SEGMENT_DEG / 2}deg)`,
+                    color: SEGMENT_TEXT_COLOR,
+                  }}
+                >
+                  <span>{premio.texto}</span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
 
-        <div className="ruleta-result-area">
-          {fase === 'sigue' && (
-            <p className="ruleta-result ruleta-result-neutral">{resultado.texto}</p>
-          )}
-          {fase === 'resultado' && (
-            <p className={`ruleta-result ${esPerdiste ? 'ruleta-result-neutral' : 'ruleta-result-premio'}`}>
-              {resultado.texto}
-            </p>
-          )}
+          <div className="ruleta-result-area">
+            {fase === 'sigue' && (
+              <p className="ruleta-result ruleta-result-neutral">{resultado.texto}</p>
+            )}
+            {fase === 'resultado' && (
+              <p className={`ruleta-result ${esPerdiste ? 'ruleta-result-neutral' : 'ruleta-result-premio'}`}>
+                {resultado.texto}
+              </p>
+            )}
+          </div>
         </div>
 
         <div className="ruleta-actions">
