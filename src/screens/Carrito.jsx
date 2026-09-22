@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { IconCart, IconTrash, IconWhatsapp } from '../components/Icons'
 import FeaturedCarousel from '../components/FeaturedCarousel'
+import EntregaForm from '../components/EntregaForm'
 import { useCart } from '../context/CartContext'
 import { useDisponibilidad } from '../context/DisponibilidadContext'
 import { resolveProductAvailability } from '../utils/availability'
@@ -23,13 +24,21 @@ function shuffle(array) {
   return result
 }
 
-export default function Carrito({ onOpenProduct }) {
-  const { items, decrementItem } = useCart()
+export default function Carrito({ onOpenProduct, onGoToInicio }) {
+  const { items, decrementItem, clearCart } = useCart()
   const { isAvailable } = useDisponibilidad()
   const [comment, setComment] = useState('')
+  const [showEntregaForm, setShowEntregaForm] = useState(false)
 
   const total = useMemo(() => items.reduce((sum, item) => sum + item.precio * item.cantidad, 0), [items])
   const whatsappLink = useMemo(() => buildWhatsAppOrderLink(items, total, comment), [items, total, comment])
+
+  function handlePedidoFinalizado() {
+    setShowEntregaForm(false)
+    clearCart()
+    setComment('')
+    onGoToInicio()
+  }
 
   // Se calcula una sola vez al entrar al carrito, para que la selección no
   // cambie mientras el cliente escribe un comentario o agrega productos.
@@ -97,10 +106,14 @@ export default function Carrito({ onOpenProduct }) {
               />
             </div>
 
-            <a className="whatsapp-send-btn" href={whatsappLink} target="_blank" rel="noopener noreferrer">
+            <button
+              type="button"
+              className="whatsapp-send-btn"
+              onClick={() => setShowEntregaForm(true)}
+            >
               <IconWhatsapp />
-              Enviar pedido por WhatsApp
-            </a>
+              Realizar pedido
+            </button>
           </>
         )}
 
@@ -113,6 +126,15 @@ export default function Carrito({ onOpenProduct }) {
           </>
         )}
       </div>
+
+      {showEntregaForm && (
+        <EntregaForm
+          subtotal={total}
+          whatsappLink={whatsappLink}
+          onClose={() => setShowEntregaForm(false)}
+          onFinish={handlePedidoFinalizado}
+        />
+      )}
     </section>
   )
 }

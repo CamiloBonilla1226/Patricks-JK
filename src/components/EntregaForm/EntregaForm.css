@@ -1,0 +1,98 @@
+.entrega-sheet {
+  max-height: none;
+}
+.entrega-sheet .sheet-top {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.entrega-sheet .sheet-top h3 {
+  font-family: 'Work Sans';
+  font-weight: 800;
+  font-size: 15px;
+  margin: 0;
+}
+.entrega-sheet .sheet-close {
+  position: static;
+}
+
+.entrega-form {
+  padding: 16px calc(16px + env(safe-area-inset-bottom, 0px)) calc(20px + env(safe-area-inset-bottom, 0px));
+}
+.entrega-field {
+  margin-bottom: 16px;
+}
+.entrega-field label {
+  display: block;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--cream-dim);
+  margin-bottom: 6px;
+}
+.entrega-field input {
+  width: 100%;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  color: var(--cream);
+  background: var(--navy-2);
+  border: 1px solid var(--border-strong);
+  padding: 11px 10px;
+}
+.entrega-field input::placeholder {
+  color: var(--cream-dim);
+}
+.entrega-field input:focus {
+  outline: none;
+  border-color: var(--amber);
+}
+.entrega-field input[aria-invalid='true'] {
+  border-color: var(--amber);
+}
+.entrega-error {
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--amber-soft);
+}
+
+.entrega-submit-btn {
+  width: 100%;
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  font-family: 'Fraunces';
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: var(--ink-on-accent);
+  background: var(--amber);
+  padding: 14px 10px;
+}
+.entrega-submit-btn:disabled {
+  cursor: not-allowed;
+  color: var(--cream-dim);
+  background: var(--navy-2);
+}
+
+.entrega-success {
+  padding: 48px 24px calc(48px + env(safe-area-inset-bottom, 0px));
+  text-align: center;
+}
+.entrega-success-ico {
+  width: 48px;
+  height: 48px;
+  color: var(--teal);
+  margin: 0 auto 16px;
+}
+.entrega-success h3 {
+  font-family: 'Work Sans';
+  font-weight: 800;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+.entrega-success p {
+  font-size: 12.5px;
+  color: var(--cream-dim);
+  line-height: 1.6;
+  margin-bottom: 22px;
+}

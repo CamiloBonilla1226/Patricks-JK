@@ -43,6 +43,8 @@ function cartReducer(state, action) {
         ),
       }
     }
+    case 'CLEAR_CART':
+      return { ...state, items: [] }
     default:
       return state
   }
@@ -61,6 +63,7 @@ export function CartProvider({ children }) {
       addItem: (item) => dispatch({ type: 'ADD_ITEM', item }),
       removeItem: (id) => dispatch({ type: 'REMOVE_ITEM', id }),
       decrementItem: (id) => dispatch({ type: 'DECREMENT_ITEM', id }),
+      clearCart: () => dispatch({ type: 'CLEAR_CART' }),
     }
   }, [state.items])
 
