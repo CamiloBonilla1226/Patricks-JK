@@ -1,15 +1,19 @@
 .card {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   align-items: center;
   width: 100%;
-  padding: 11px;
+  padding: 14px;
   background: var(--navy-2);
-  border: 1px solid var(--border);
-  margin-bottom: 9px;
+  border: 1px solid var(--border-strong);
+  /* Sombra ligera además del borde: con --navy-2 tan cerca de --navy, el
+     borde solo no bastaba para que cada fila se leyera como una tarjeta
+     separada del fondo — la sombra le da el "despegue" que faltaba. */
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--navy) 55%, transparent);
+  margin-bottom: 7px;
 }
 .card:hover {
-  border-color: var(--border-strong);
+  border-color: var(--amber);
 }
 .card-main {
   display: flex;
@@ -34,8 +38,12 @@
   outline-offset: 2px;
 }
 .card .cupwrap {
-  width: 54px;
-  height: 68px;
+  /* Las fotos de producto son cuadradas (ver ProductImage.jsx) — antes este
+     recuadro era 54x68 (no cuadrado), así que sobraba aire alrededor de la
+     imagen. 76x76 la deja llenar el cuadro por completo con object-fit:
+     cover, sin recortar el producto. */
+  width: 76px;
+  height: 76px;
   overflow: hidden;
 }
 .card.is-out .cupwrap svg,
@@ -51,7 +59,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 8px;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 .card-body h3 {
   font-family: 'Work Sans';
@@ -64,8 +72,8 @@
 .contains {
   font-size: 11.5px;
   color: var(--cream-dim);
-  line-height: 1.4;
-  margin-bottom: 7px;
+  line-height: 1.3;
+  margin-bottom: 5px;
 }
 .tapcue {
   flex: none;
