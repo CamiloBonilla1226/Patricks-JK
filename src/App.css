@@ -71,7 +71,17 @@ main {
 
 /* ================= SECTION HEAD ================= */
 .sec-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   margin-bottom: 14px;
+}
+.sec-head-logo {
+  flex: none;
+  height: 40px;
+  width: auto;
+  object-fit: contain;
 }
 .sec-head .eyebrow {
   font-size: 10px;
@@ -160,6 +170,12 @@ main {
   }
 }
 #tab-inicio .sec-head h1 {
+  /* .sec-head ahora es flex (para poner el logo junto al título en Menú y
+     Carrito) — Inicio no tiene logo ahí, pero su único hijo (el h1) necesita
+     flex:1 para seguir ocupando todo el ancho y que el centrado no quede
+     sin efecto (un ítem flex se encoge a su contenido si no se le dice
+     lo contrario). */
+  flex: 1;
   text-align: center;
 }
 .hero-logo {

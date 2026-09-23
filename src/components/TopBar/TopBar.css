@@ -69,9 +69,3 @@
   background: var(--cream-dim);
   box-shadow: none;
 }
-.topbar-logo {
-  flex: none;
-  height: 28px;
-  width: auto;
-  object-fit: contain;
-}

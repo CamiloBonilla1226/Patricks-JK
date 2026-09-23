@@ -5,6 +5,7 @@ import { CATEGORIES, PRODUCTS } from '../data/products'
 import { useDisponibilidad } from '../context/DisponibilidadContext'
 import { resolveProductAvailability } from '../utils/availability'
 import { matchesQuery } from '../utils/search'
+import logo from '../assets/images/logo-optimized.png'
 
 const SEARCH_MAX_LENGTH = 60
 
@@ -29,8 +30,11 @@ export default function Menu({ activeCategory, onChangeCategory, onOpenProduct }
   return (
     <section className="screen" id="tab-menu">
       <div className="sec-head">
-        <div className="eyebrow">Carta</div>
-        <h1>Menú</h1>
+        <div>
+          <div className="eyebrow">Carta</div>
+          <h1>Menú</h1>
+        </div>
+        <img className="sec-head-logo" src={logo} alt="Patrick's JK" />
       </div>
 
       <div className="search-box" data-no-swipe>

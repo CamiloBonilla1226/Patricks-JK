@@ -12,6 +12,7 @@ import { formatPrice } from '../utils/format'
 import { buildWhatsAppOrderLink } from '../utils/whatsapp'
 import { obtenerDeviceId } from '../lib/deviceId'
 import { verificarSiYaJugo } from '../lib/ruleta'
+import logo from '../assets/images/logo-optimized.png'
 
 const COMMENT_MAX_LENGTH = 300
 const SUGGESTIONS_MAX_PRICE = 20000
@@ -136,8 +137,11 @@ export default function Carrito({ onOpenProduct, onGoToInicio }) {
   return (
     <section className="screen" id="tab-carrito">
       <div className="sec-head">
-        <div className="eyebrow">Tu pedido</div>
-        <h1>Carrito</h1>
+        <div>
+          <div className="eyebrow">Tu pedido</div>
+          <h1>Carrito</h1>
+        </div>
+        <img className="sec-head-logo" src={logo} alt="Patrick's JK" />
       </div>
       <div id="cartContent">
         {items.length === 0 ? (
